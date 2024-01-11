@@ -9,6 +9,7 @@ import {
     HeatMapOutlined,
     GlobalOutlined,
 } from "@ant-design/icons";
+import { FaLocationDot } from "react-icons/fa6";
 
 export const WhatsAppIcon = (props) => {
     return <WhatsAppOutlined style={{ color: `${props.color}` }} />;
@@ -16,8 +17,8 @@ export const WhatsAppIcon = (props) => {
 export const MailIcon = (props) => {
     return <MailOutlined style={{ color: `${props.color}` }} />;
 };
-export const HeatmapIcon = (props) => {
-    return <HeatMapOutlined style={{ color: `${props.color}` }} />;
+export const LocationIcon = (props) => {
+    return <FaLocationDot style={{ color: `${props.color}` }} />;
 };
 export const IdCardIcon = (props) => {
     return <IdcardOutlined style={{ color: `${props.color}` }} />;

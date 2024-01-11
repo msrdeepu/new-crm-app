@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import {
     WhatsAppIcon,
     MailIcon,
-    HeatmapIcon,
+    LocationIcon,
     IdCardIcon,
     GlobeIcon,
     PhoneIcon,
@@ -208,7 +208,7 @@ const ContactForm = () => {
                     <CustomInputItem
                         label="City / Town"
                         showCount={true}
-                        addonBefore={<HeatmapIcon color="orange" />}
+                        addonBefore={<LocationIcon color="orange" />}
                         // validateStatus={
                         //     designation == "" ? "warning" : "success"
                         // }
