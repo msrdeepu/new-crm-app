@@ -61,7 +61,12 @@ export default function Authenticated({ header, children }) {
 
     return (
         <Layout className="app-layout">
-            <Sider trigger={null} collapsible collapsed={collapsed}>
+            <Sider
+                theme="dark"
+                trigger={null}
+                collapsible
+                collapsed={collapsed}
+            >
                 <div className="logo">
                     <Typography.Title className="logo-text" level={3}>
                         {collapsed ? "MSR" : "Web App"}

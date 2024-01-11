@@ -3,12 +3,34 @@ import { Head } from "@inertiajs/react";
 import { Card } from "antd";
 import ContactForm from "./ContactForm";
 
-function CreateContact(props) {
+import {
+    logoSrc,
+    logoWidth,
+    logoAlt,
+    logoHeight,
+    logoMarginHeight,
+} from "../LogoItem/LogoItem";
+
+function CreateContact() {
     return (
         <>
-            <Head title="Dashboard" />
+            <Head />
 
-            <Card title={`Welcome, ${props.auth.user.name}`}>
+            <Card
+                title={
+                    <div>
+                        <img
+                            src={logoSrc} // Replace with the URL or path of your image
+                            alt={logoAlt}
+                            style={{
+                                marginRight: `${logoMarginHeight}px`,
+                                width: `${logoWidth}px`,
+                                height: `${logoHeight}px`,
+                            }}
+                        />
+                    </div>
+                }
+            >
                 <ContactForm />
             </Card>
         </>

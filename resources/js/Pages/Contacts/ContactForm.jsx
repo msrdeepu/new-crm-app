@@ -13,15 +13,28 @@ import {
 import { Col, Row, Form, Input, Select, Space } from "antd";
 const { TextArea } = Input;
 
+//custom form fields
+import { CustomInputItem, CustomSelectItem } from "../FormFields/FormFields";
+
 //btns
 import BtnsItems from "../Btns/BtnsItems";
 
 const ContactForm = () => {
+    const [designation, setDesignation] = useState("");
+
+    const designationHandler = (e) => {
+        setDesignation(e.target.value);
+    };
+    let options = [
+        { value: "jack", label: "Jack" },
+        { value: "lucy", label: "Lucy" },
+        { value: "Yiminghe", label: "yiminghe" },
+    ];
     return (
         <Form layout="vertical">
             <Row gutter={[8, 4]}>
                 <Col xs={24} md={12}>
-                    <Form.Item label="Contact Type">
+                    {/* <Form.Item label="Contact Type">
                         <Select
                             defaultValue="lucy"
                             style={{ width: "100%" }}
@@ -31,7 +44,8 @@ const ContactForm = () => {
                                 { value: "Yiminghe", label: "yiminghe" },
                             ]}
                         />
-                    </Form.Item>
+                    </Form.Item> */}
+                    <CustomSelectItem label={"Contact Type"} data={options} />
                 </Col>
                 <Col xs={24} md={12}>
                     <Form.Item label="Full Name">
@@ -54,112 +68,162 @@ const ContactForm = () => {
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={12}>
-                    <Form.Item label="Role / Designation">
-                        <Input
-                            showCount
-                            placeholder="Enter Role / Designation"
-                            addonBefore={<IdCardIcon color="blue" />}
-                        />
-                    </Form.Item>
+                    <CustomInputItem
+                        label="Role / Designation"
+                        validateStatus={
+                            designation == "" ? "warning" : "success"
+                        }
+                        showCount={true}
+                        addonBefore={<IdCardIcon color="blue" />}
+                        onChange={designationHandler}
+                        labelName="designation"
+                        required={false}
+                        name={"designation"}
+                    />
                 </Col>
                 <Col xs={24} md={12}>
-                    <Form.Item label="Firm / Company Name">
-                        <Input
-                            showCount
-                            placeholder="Enter Firm / Company Name"
-                            addonBefore={<LoginIcon color="purple" />}
-                        />
-                    </Form.Item>
+                    <CustomInputItem
+                        label="Firm / Company Name"
+                        showCount={true}
+                        addonBefore={<LoginIcon color="purple" />}
+                        // validateStatus={
+                        //     designation == "" ? "warning" : "success"
+                        // }
+                        //onChange={designationHandler}
+                        labelName="companyname"
+                        required={false}
+                    />
                 </Col>
                 <Col xs={24} md={12}>
-                    <Form.Item label="PAN Number">
-                        <Input
-                            showCount
-                            placeholder="Enter PAN Number"
-                            addonBefore={<CreditCard color="red" />}
-                        />
-                    </Form.Item>
+                    <CustomInputItem
+                        label="PAN Number"
+                        showCount={true}
+                        addonBefore={<CreditCard color="red" />}
+                        labelName="pannumber"
+                        name={"pannumber"}
+                        required={false}
+                        // validateStatus={
+                        //     designation == "" ? "warning" : "success"
+                        // }
+                        //onChange={designationHandler}
+                    />
                 </Col>
                 <Col xs={24} md={12}>
-                    <Form.Item label="GST Number">
-                        <Input
-                            showCount
-                            placeholder="Enter GST Number"
-                            addonBefore={<CreditCard color="red" />}
-                        />
-                    </Form.Item>
+                    <CustomInputItem
+                        label="GST Number"
+                        showCount={true}
+                        addonBefore={<CreditCard color="red" />}
+                        // validateStatus={
+                        //     designation == "" ? "warning" : "success"
+                        // }
+                        //onChange={designationHandler}
+                        labelName="gst"
+                        required={false}
+                    />
                 </Col>
                 <Col xs={24} md={12}>
-                    <Form.Item label="Phone Number">
-                        <Input
-                            showCount
-                            placeholder="Enter Phone Number"
-                            addonBefore={<PhoneIcon color="green" />}
-                        />
-                    </Form.Item>
+                    <CustomInputItem
+                        label="Phone Number"
+                        showCount={true}
+                        addonBefore={<PhoneIcon color="green" />}
+                        // validateStatus={
+                        //     designation == "" ? "warning" : "success"
+                        // }
+                        //onChange={designationHandler}
+                        labelName="phone"
+                        required={false}
+                    />
                 </Col>
                 <Col xs={24} md={12}>
-                    <Form.Item label="Mobile Number">
-                        <Input
-                            showCount
-                            placeholder="Enter Mobile Number"
-                            addonBefore={<PhoneIcon color="green" />}
-                        />
-                    </Form.Item>
+                    <CustomInputItem
+                        label="Mobile Number"
+                        showCount={true}
+                        addonBefore={<PhoneIcon color="green" />}
+                        // validateStatus={
+                        //     designation == "" ? "warning" : "success"
+                        // }
+                        //onChange={designationHandler}
+                        labelName="mobile"
+                        required={false}
+                    />
                 </Col>
                 <Col xs={24} md={12}>
-                    <Form.Item label="Alternate Contact Number">
-                        <Input
-                            showCount
-                            placeholder="Alternate Contact Number"
-                            addonBefore={<PhoneIcon color="green" />}
-                        />
-                    </Form.Item>
+                    <CustomInputItem
+                        label="Alternate Contact Number"
+                        showCount={true}
+                        addonBefore={<PhoneIcon color="green" />}
+                        // validateStatus={
+                        //     designation == "" ? "warning" : "success"
+                        // }
+                        //onChange={designationHandler}
+                        labelName="altcontact"
+                        required={false}
+                    />
                 </Col>
                 <Col xs={24} md={12}>
-                    <Form.Item label="WhatsApp Number">
-                        <Input
-                            showCount
-                            placeholder="WhatsApp Number"
-                            addonBefore={<WhatsAppIcon color="green" />}
-                        />
-                    </Form.Item>
+                    <CustomInputItem
+                        label="WhatsApp Number"
+                        showCount={true}
+                        addonBefore={<PhoneIcon color="green" />}
+                        // validateStatus={
+                        //     designation == "" ? "warning" : "success"
+                        // }
+                        //onChange={designationHandler}
+                        labelName="wpnum"
+                        required={false}
+                    />
                 </Col>
                 <Col xs={24} md={12}>
-                    <Form.Item label="Email ID">
-                        <Input
-                            showCount
-                            placeholder="Email ID"
-                            addonBefore={<MailIcon color="orange" />}
-                        />
-                    </Form.Item>
+                    <CustomInputItem
+                        label="Email ID"
+                        showCount={true}
+                        addonBefore={<MailIcon color="orange" />}
+                        // validateStatus={
+                        //     designation == "" ? "warning" : "success"
+                        // }
+                        //onChange={designationHandler}
+                        labelName="mailid"
+                        required={false}
+                    />
                 </Col>
                 <Col xs={24} md={12}>
-                    <Form.Item label="Alternate Email ID">
-                        <Input
-                            showCount
-                            placeholder="Alternate Email ID"
-                            addonBefore={<MailIcon color="blue" />}
-                        />
-                    </Form.Item>
+                    <CustomInputItem
+                        label="Alternate Email ID"
+                        showCount={true}
+                        addonBefore={<MailIcon color="blue" />}
+                        // validateStatus={
+                        //     designation == "" ? "warning" : "success"
+                        // }
+                        //onChange={designationHandler}
+                        labelName="altmailid"
+                        required={false}
+                    />
                 </Col>
                 <Col xs={24} md={12}>
-                    <Form.Item label="Website URL">
-                        <Input
-                            showCount
-                            placeholder="Website URL"
-                            addonBefore={<GlobeIcon color="purple" />}
-                        />
-                    </Form.Item>
+                    <CustomInputItem
+                        label="Website URL"
+                        showCount={true}
+                        addonBefore={<GlobeIcon color="purple" />}
+                        // validateStatus={
+                        //     designation == "" ? "warning" : "success"
+                        // }
+                        //onChange={designationHandler}
+                        labelName="weburl"
+                        required={false}
+                    />
                 </Col>
                 <Col xs={24} md={12}>
-                    <Form.Item label="City / Town">
-                        <Input
-                            showCount
-                            placeholder="City / Town"
-                            addonBefore={<HeatmapIcon color="orange" />}
-                        />
-                    </Form.Item>
+                    <CustomInputItem
+                        label="City / Town"
+                        showCount={true}
+                        addonBefore={<HeatmapIcon color="orange" />}
+                        // validateStatus={
+                        //     designation == "" ? "warning" : "success"
+                        // }
+                        //onChange={designationHandler}
+                        labelName="city"
+                        required={false}
+                    />
                 </Col>
 
                 <Col xs={24} md={12}>
