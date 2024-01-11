@@ -2,31 +2,35 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import { Card, Typography } from "antd";
 
+import {
+    logoSrc,
+    logoWidth,
+    logoAlt,
+    logoHeight,
+    logoMarginHeight,
+} from "../components/LogoItem/LogoItem";
+
 function ContactsList(props) {
     return (
         <>
             <Head title="Dashboard" />
 
-            {/* <Card title={`Welcome, ${props.auth.user.name}`}>
-                <Typography.Text>You're logged in!</Typography.Text>
-            </Card> */}
             <Card
                 title={
                     <div>
                         <img
-                            src="https://dgbits.in/images/logo-dgbits.svg" // Replace with the URL or path of your image
-                            alt="Image Alt Text"
+                            src={logoSrc} // Replace with the URL or path of your image
+                            alt={logoAlt}
                             style={{
-                                marginRight: "8px",
-                                width: "30px",
-                                height: "30px",
+                                marginRight: `${logoMarginHeight}px`,
+                                width: `${logoWidth}px`,
+                                height: `${logoHeight}px`,
                             }}
                         />
-                        Card Title with Image
                     </div>
                 }
             >
-                {/* Card Content */}
+                Contact List
             </Card>
         </>
     );

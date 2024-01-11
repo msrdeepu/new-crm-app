@@ -9,15 +9,18 @@ import {
     PhoneIcon,
     CreditCard,
     LoginIcon,
-} from "../Icons/Icons";
+} from "../components/Icons/Icons";
 import { Col, Row, Form, Input, Select, Space } from "antd";
 const { TextArea } = Input;
 
 //custom form fields
-import { CustomInputItem, CustomSelectItem } from "../FormFields/FormFields";
+import {
+    CustomInputItem,
+    CustomSelectItem,
+} from "../components/FormFields/FormFields";
 
 //btns
-import BtnsItems from "../Btns/BtnsItems";
+import BtnsItems from "../components/Btns/BtnsItems";
 
 const ContactForm = () => {
     const [designation, setDesignation] = useState("");

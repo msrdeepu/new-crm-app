@@ -9,7 +9,7 @@ import {
     logoAlt,
     logoHeight,
     logoMarginHeight,
-} from "../LogoItem/LogoItem";
+} from "../components/LogoItem/LogoItem";
 
 function CreateContact() {
     return (
