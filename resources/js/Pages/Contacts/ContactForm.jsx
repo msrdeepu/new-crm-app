@@ -37,17 +37,6 @@ const ContactForm = () => {
         <Form layout="vertical">
             <Row gutter={[8, 4]}>
                 <Col xs={24} md={12}>
-                    {/* <Form.Item label="Contact Type">
-                        <Select
-                            defaultValue="lucy"
-                            style={{ width: "100%" }}
-                            options={[
-                                { value: "jack", label: "Jack" },
-                                { value: "lucy", label: "Lucy" },
-                                { value: "Yiminghe", label: "yiminghe" },
-                            ]}
-                        />
-                    </Form.Item> */}
                     <CustomSelectItem label={"Contact Type"} data={options} />
                 </Col>
                 <Col xs={24} md={12}>
@@ -167,7 +156,7 @@ const ContactForm = () => {
                     <CustomInputItem
                         label="WhatsApp Number"
                         showCount={true}
-                        addonBefore={<PhoneIcon color="green" />}
+                        addonBefore={<WhatsAppIcon color="green" />}
                         // validateStatus={
                         //     designation == "" ? "warning" : "success"
                         // }
