@@ -7,3 +7,5 @@ export const logoWidth = 120;
 export const logoHeight = 30;
 
 export const logoMarginHeight = 8;
+
+export const logOPosition = "flex-start";

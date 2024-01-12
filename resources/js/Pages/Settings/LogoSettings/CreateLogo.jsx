@@ -1,7 +1,6 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head } from "@inertiajs/react";
+import { Head, Link, router } from "@inertiajs/react";
 import { Card } from "antd";
-import ContactForm from "./ContactForm";
 
 import {
     logoSrc,
@@ -9,9 +8,12 @@ import {
     logoAlt,
     logoHeight,
     logoMarginHeight,
-} from "../components/LogoItem/LogoItem";
+    logOPosition,
+} from "../../components/LogoItem/LogoItem";
 
-function CreateContact() {
+import LogoForm from "./LogoForm";
+
+function CreateLogo() {
     return (
         <>
             <Head />
@@ -21,7 +23,7 @@ function CreateContact() {
                     <div
                         style={{
                             display: "flex",
-                            justifyContent: "start",
+                            justifyContent: `${logOPosition}`,
                         }}
                     >
                         <img
@@ -36,12 +38,12 @@ function CreateContact() {
                     </div>
                 }
             >
-                <ContactForm />
+                <LogoForm />
             </Card>
         </>
     );
 }
 
-CreateContact.layout = (page) => <AuthenticatedLayout children={page} />;
+CreateLogo.layout = (page) => <AuthenticatedLayout children={page} />;
 
-export default CreateContact;
+export default CreateLogo;

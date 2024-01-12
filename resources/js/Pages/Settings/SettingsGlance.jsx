@@ -1,7 +1,6 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import { Card } from "antd";
-import ContactForm from "./ContactForm";
 
 import {
     logoSrc,
@@ -11,7 +10,7 @@ import {
     logoMarginHeight,
 } from "../components/LogoItem/LogoItem";
 
-function CreateContact() {
+function SettingsGlance() {
     return (
         <>
             <Head />
@@ -36,12 +35,12 @@ function CreateContact() {
                     </div>
                 }
             >
-                <ContactForm />
+                Setting Glance
             </Card>
         </>
     );
 }
 
-CreateContact.layout = (page) => <AuthenticatedLayout children={page} />;
+SettingsGlance.layout = (page) => <AuthenticatedLayout children={page} />;
 
-export default CreateContact;
+export default SettingsGlance;

@@ -12,7 +12,7 @@ const BtnsItems = (props) => {
             >
                 {props.firstText}
             </Button>
-            <Button style={{ margin: "5px" }} danger>
+            <Button style={{ margin: "5px" }} danger onClick={props.cancelForm}>
                 {props.secondText}
             </Button>
         </div>
