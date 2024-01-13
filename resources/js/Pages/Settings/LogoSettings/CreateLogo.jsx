@@ -1,5 +1,6 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, Link, router } from "@inertiajs/react";
+import { Head, Link, router, useForm } from "@inertiajs/react";
+import { v4 as uuidv4 } from "uuid";
 import { Card } from "antd";
 
 import {
@@ -14,6 +15,21 @@ import {
 import LogoForm from "./LogoForm";
 
 function CreateLogo() {
+    let id = uuidv4();
+    const { data, setData, post, processing, errors, patch } = useForm({
+        logoId: id,
+        logoFile: "",
+        logoPosition: "",
+        logoHeight: "",
+        logoWidth: "",
+        logoMargin: "",
+    });
+    const submitHandler = (e) => {
+        // e.preventDefault();
+        console.log(data);
+        post("/scrm/settings/logo/store");
+    };
+
     return (
         <>
             <Head />
@@ -38,7 +54,11 @@ function CreateLogo() {
                     </div>
                 }
             >
-                <LogoForm />
+                <LogoForm
+                    data={data}
+                    setData={setData}
+                    onSubmit={submitHandler}
+                />
             </Card>
         </>
     );

@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use App\Models\Logo;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 class LogoController extends Controller
 {
     /**
@@ -21,7 +22,11 @@ class LogoController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Settings/LogoSettings/CreateLogo');
+        $user = Auth::user();
+        return Inertia::render('Settings/LogoSettings/CreateLogo',[
+            'user' => $user,
+            'record'=> new Logo(),
+        ]);
     }
 
     /**
@@ -29,7 +34,20 @@ class LogoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       //dd($request);
+       $logo= null;
+       $requestData = $request->all();
+       if ($request->file('logoFile')){
+           $logo = $request->file('logoFile')->store('images', 'public' );            
+           $requestData['logoFile'] = $logo;
+           //$requestData['logoFile'] = asset($logo);
+           
+              
+       }
+
+       $data= Logo::create($requestData);
+       $data->save();
+       return to_route('logo.index');
     }
 
     /**
