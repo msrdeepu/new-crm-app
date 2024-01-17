@@ -53,6 +53,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/scrm-settings/{id}', [SettingController::class, 'destroy']) -> name('settings.destroy');
 
     Route::get('/scrm/settings/logo', [LogoController::class, 'index'])->name('logo.index');
+    Route::get('/scrm/settings/logo/show', [LogoController::class, 'show'])->name('logo.show');
     Route::get('/scrm/settings/logo/create', [LogoController::class, 'create'])->name('logo.create');
     Route::post('/scrm/settings/logo/store', [LogoController::class, 'store'])->name('logo.store');
     Route::get('/scrm/settings/logo/{id}/edit',[LogoController::class, 'edit'])->name('logo.edit');

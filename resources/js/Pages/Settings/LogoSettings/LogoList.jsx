@@ -13,11 +13,11 @@ import {
     logOPosition,
 } from "../../components/LogoItem/LogoItem";
 
-function LogoList() {
+function LogoList(logoFileList) {
     return (
         <>
             <Head />
-
+            {console.log(logoFileList.logoFileList[0])}
             <Card
                 title={
                     <div

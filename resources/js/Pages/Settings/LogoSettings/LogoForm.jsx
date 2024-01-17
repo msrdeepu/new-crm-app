@@ -29,6 +29,10 @@ const LogoForm = ({ onSubmit, data, setData, uniqueId }) => {
         //console.log(value);
         setData("logoPosition", value);
     };
+    const logoStatusHandler = (value) => {
+        //console.log(value);
+        setData("logoStatus", value);
+    };
     const logoHeightHandler = (value) => {
         //console.log(value);
         setData("logoHeight", value);
@@ -44,7 +48,7 @@ const LogoForm = ({ onSubmit, data, setData, uniqueId }) => {
     return (
         <Form layout="vertical" onFinish={onSubmit}>
             <Row gutter={[8, 4]}>
-                <Col xs={24} md={12}>
+                <Col xs={24} md={8}>
                     <CustomInputItem
                         name={"logoFile"}
                         labelName={"logoFile"}
@@ -53,7 +57,7 @@ const LogoForm = ({ onSubmit, data, setData, uniqueId }) => {
                         onChange={logoFileHandler}
                     />
                 </Col>
-                <Col xs={24} md={12}>
+                <Col xs={24} md={8}>
                     <CustomSelectItem
                         name={"logoPosition"}
                         labelName={"logoPosition"}
@@ -64,6 +68,19 @@ const LogoForm = ({ onSubmit, data, setData, uniqueId }) => {
                             { name: "Start", value: "Start" },
                             { name: "Center", value: "Center" },
                             { name: "End", value: "End" },
+                        ]}
+                    />
+                </Col>
+                <Col xs={24} md={8}>
+                    <CustomSelectItem
+                        name={"logoStatus"}
+                        labelName={"logoStatus"}
+                        onChange={logoStatusHandler}
+                        width={100}
+                        label={"Logo Status"}
+                        data={[
+                            { name: "Active", value: "Active" },
+                            { name: "InActive", value: "InActive" },
                         ]}
                     />
                 </Col>

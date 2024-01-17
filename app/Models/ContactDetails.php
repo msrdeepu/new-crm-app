@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Contact extends Model
+class ContactDetails extends Model
 {
     use HasFactory;
 
-    public function contact_details()
+    public function contact()
     {
-        return $this->hasMany(ContactDetails::class);
+        return $this->belongsTo(Contact::class);
     }
 }

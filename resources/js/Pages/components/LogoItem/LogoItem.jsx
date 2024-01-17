@@ -1,3 +1,5 @@
+// export const logoSrc =
+//     "https://rubyinfraap.com/assets/wrap/images/rubylogo1.png";
 export const logoSrc = "https://dgbits.in/images/logo-dgbits.svg";
 
 export const logoAlt = "DGBITS LOGO";

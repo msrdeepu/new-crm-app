@@ -26,7 +26,7 @@ function CreateLogo() {
     });
     const submitHandler = (e) => {
         // e.preventDefault();
-        console.log(data);
+        //console.log(data);
         post("/scrm/settings/logo/store");
     };
 

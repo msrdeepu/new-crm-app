@@ -16,6 +16,7 @@ return new class extends Migration
             $table->text('logoId');
             $table ->text('logoFile')->nullable();
             $table ->text('logoPosition')->nullable();
+            $table ->string('logoStatus')->nullable();
             $table ->bigInteger('logoHeight')->nullable();
             $table ->bigInteger('logoWidth')->nullable();
             $table ->bigInteger('logoMargin')->nullable();

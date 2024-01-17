@@ -14,7 +14,12 @@ class LogoController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Settings/LogoSettings/LogoList');
+        //$resource = Logo::get(['*', 'logoId as key']);
+        //$logoList = Logo::get(['logoId','logoFile', 'logoPosition', 'logoHeight','logoWidth','logoMargin','logoId AS key']);
+        $logoFile = Logo::where('logoStatus', '=', 'Active')->pluck('logoFile');
+        return Inertia::render('Settings/LogoSettings/LogoList', [
+            'logoFileList' => $logoFile,
+        ]);
     }
 
     /**
@@ -55,7 +60,13 @@ class LogoController extends Controller
      */
     public function show(Logo $logo)
     {
-        //
+        //$resource = Logo::get(['*', 'logoId as key']);
+        //$logoList = Logo::get(['logoId','logoFile', 'logoPosition', 'logoHeight','logoWidth','logoMargin','logoId AS key']);
+        $logoFile = Logo::where('logoStatus', '=', 'Active')->pluck('logoFile');
+        return Inertia::render('Components/LogoItem/LogoItem', [
+            'logoFileList' => $logoList,
+         
+        ]);
     }
 
     /**
