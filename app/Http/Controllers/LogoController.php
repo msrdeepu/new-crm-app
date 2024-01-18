@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use App\Models\Logo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+
 class LogoController extends Controller
 {
     /**
@@ -28,9 +30,9 @@ class LogoController extends Controller
     public function create()
     {
         $user = Auth::user();
-        return Inertia::render('Settings/LogoSettings/CreateLogo',[
+        return Inertia::render('Settings/LogoSettings/CreateLogo', [
             'user' => $user,
-            'record'=> new Logo(),
+            'record' => new Logo(),
         ]);
     }
 
@@ -39,20 +41,20 @@ class LogoController extends Controller
      */
     public function store(Request $request)
     {
-       //dd($request);
-       $logo= null;
-       $requestData = $request->all();
-       if ($request->file('logoFile')){
-           $logo = $request->file('logoFile')->store('images', 'public' );            
-           $requestData['logoFile'] = $logo;
-           //$requestData['logoFile'] = asset($logo);
-           
-              
-       }
+        //dd($request);
+        $logo = null;
+        $requestData = $request->all();
+        if ($request->file('logoFile')) {
+            $logo = $request->file('logoFile')->store('images', 'public');
+            $requestData['logoFile'] = $logo;
+            //$requestData['logoFile'] = asset($logo);
 
-       $data= Logo::create($requestData);
-       $data->save();
-       return to_route('logo.index');
+
+        }
+
+        $data = Logo::create($requestData);
+        $data->save();
+        return to_route('logo.index');
     }
 
     /**
@@ -60,13 +62,9 @@ class LogoController extends Controller
      */
     public function show(Logo $logo)
     {
-        //$resource = Logo::get(['*', 'logoId as key']);
-        //$logoList = Logo::get(['logoId','logoFile', 'logoPosition', 'logoHeight','logoWidth','logoMargin','logoId AS key']);
-        $logoFile = Logo::where('logoStatus', '=', 'Active')->pluck('logoFile');
-        return Inertia::render('Components/LogoItem/LogoItem', [
-            'logoFileList' => $logoList,
-         
-        ]);
+        return DB::table('logos')->where('status', '=', 'Active')->where('logoFile', '!=', '')->get();
+
+        return Inertia::render('Components/LogoItem/LogoItem');
     }
 
     /**

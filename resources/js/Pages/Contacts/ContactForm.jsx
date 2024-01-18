@@ -17,6 +17,7 @@ const { TextArea } = Input;
 import {
     CustomInputItem,
     CustomSelectItem,
+    CustomTextArea,
 } from "../components/FormFields/FormFields";
 
 //btns
@@ -24,6 +25,7 @@ import BtnsItems from "../components/Btns/BtnsItems";
 
 const ContactForm = () => {
     const [designation, setDesignation] = useState("");
+    // const
 
     const designationHandler = (e) => {
         setDesignation(e.target.value);
@@ -263,27 +265,22 @@ const ContactForm = () => {
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={12}>
-                    <Form.Item label="Image / Avatar">
-                        <TextArea showCount placeholder="House Address" />
-                    </Form.Item>
+                    <CustomTextArea label="House Address" showCount={true} />
                 </Col>
                 <Col xs={24} md={12}>
-                    <Form.Item label="Office Address">
-                        <TextArea showCount placeholder="Office Address" />
-                    </Form.Item>
+                    <CustomTextArea label="Office Address" showCount={true} />
                 </Col>
                 <Col xs={24} md={12}>
-                    <Form.Item label="Permanent Address">
-                        <TextArea showCount placeholder="Permanent Address" />
-                    </Form.Item>
+                    <CustomTextArea
+                        label="Permanent Address"
+                        showCount={true}
+                    />
                 </Col>
                 <Col xs={24} md={12}>
-                    <Form.Item label="Bank Account Details">
-                        <TextArea
-                            showCount
-                            placeholder="Bank Account Details"
-                        />
-                    </Form.Item>
+                    <CustomTextArea
+                        label="Bank Account Details"
+                        showCount={true}
+                    />
                 </Col>
             </Row>
             <BtnsItems firstText="Add" secondText="Cancel" />

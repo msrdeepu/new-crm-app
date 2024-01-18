@@ -1,5 +1,7 @@
 import { Col, Row, Form, Input, Select, Space } from "antd";
 
+const { TextArea } = Input;
+
 export const CustomInputItem = ({
     label,
     validateStatus,
@@ -138,6 +140,27 @@ export const InputWithPrefixSelect = ({
                     placeholder={`Enter ${label}`}
                 />
             </Space.Compact>
+        </Form.Item>
+    );
+};
+
+export const CustomTextArea = ({
+    label,
+    labelName,
+    name,
+    showCount,
+    onChange,
+    required,
+}) => {
+    return (
+        <Form.Item label={label} name={labelName}>
+            <TextArea
+                name={name}
+                showCount={showCount}
+                placeholder={`Enter ${label}`}
+                onChange={onChange}
+                required={required}
+            />
         </Form.Item>
     );
 };
