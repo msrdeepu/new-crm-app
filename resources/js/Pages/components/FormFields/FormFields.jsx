@@ -13,6 +13,8 @@ export const CustomInputItem = ({
     onChange,
     required,
     type,
+    max,
+    validator,
 }) => {
     return (
         <Form.Item
@@ -28,12 +30,16 @@ export const CustomInputItem = ({
                               required: true,
                               message: `Please Enter ${label}`,
                           },
+                          //   {
+                          //       validator: { validator },
+                          //   },
                       ]
                     : []
             }
         >
             <Input
                 name={name}
+                maxLength={max}
                 showCount={showCount}
                 placeholder={`Enter ${label}`}
                 addonBefore={addonBefore}

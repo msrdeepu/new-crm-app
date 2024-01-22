@@ -1,5 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 import { Card } from "antd";
 import ContactForm from "./ContactForm";
 
@@ -12,6 +12,34 @@ import {
 } from "../components/LogoItem/LogoItem";
 
 function CreateContact() {
+    const { data, setData, post, processing, errors, patch } = useForm({
+        ctype: "",
+        title: "",
+        // fullname: "",
+        // designation: "",
+        // company: "",
+        // pannumber: "",
+        // gstnumber: "",
+        // phone: "",
+        // mobilenum: "",
+        // altcontact: "",
+        // wpnumber: "",
+        // emailid: "",
+        // altemailid: "",
+        // weburl: "",
+        // city: "",
+        // country: "",
+        // billaddress: "",
+        // avatar: "",
+        // status: "",
+        // houseaddress: "",
+        // officeaddress: "",
+        // perminantaddress: "",
+        // bankdetails: "",
+    });
+    const submitHandler = () => {
+        console.log(data);
+    };
     return (
         <>
             <Head />
@@ -36,7 +64,12 @@ function CreateContact() {
                     </div>
                 }
             >
-                <ContactForm />
+                <ContactForm
+                    data={data}
+                    setData={setData}
+                    saveBtn={"Submit"}
+                    submitHandler={submitHandler}
+                />
             </Card>
         </>
     );

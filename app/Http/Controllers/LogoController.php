@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
+use function Termwind\render;
+
 class LogoController extends Controller
 {
     /**
@@ -62,9 +64,9 @@ class LogoController extends Controller
      */
     public function show(Logo $logo)
     {
-        return DB::table('logos')->where('status', '=', 'Active')->where('logoFile', '!=', '')->get();
+        // return DB::table('logos')->where('status', '=', 'Active')->where('logoFile', '!=', '')->get();
 
-        return Inertia::render('Components/LogoItem/LogoItem');
+        // return Inertia::render('Components/LogoItem/LogoItem');
     }
 
     /**
