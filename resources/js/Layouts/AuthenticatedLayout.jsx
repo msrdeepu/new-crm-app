@@ -20,6 +20,7 @@ import {
     Dropdown,
     Avatar,
 } from "antd";
+import { IoSettings } from "react-icons/io5";
 
 const { Header, Sider, Content } = Layout;
 
@@ -92,6 +93,15 @@ export default function Authenticated({ header, children }) {
                             label: (
                                 <Link href={window.route("contacts.index")}>
                                     Contacts
+                                </Link>
+                            ),
+                        },
+                        {
+                            key: "settings",
+                            icon: <IoSettings />,
+                            label: (
+                                <Link href={window.route("settings.index")}>
+                                    Settings
                                 </Link>
                             ),
                         },

@@ -1,6 +1,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm } from "@inertiajs/react";
 import { Card } from "antd";
+import { v4 as uuidv4 } from "uuid";
 import ContactForm from "./ContactForm";
 
 import {
@@ -11,34 +12,37 @@ import {
     logoMarginHeight,
 } from "../components/LogoItem/LogoItem";
 
-function CreateContact() {
+function CreateContact({ contactType, country }) {
+    let contid = uuidv4();
     const { data, setData, post, processing, errors, patch } = useForm({
         ctype: "",
+        contactid: contid,
         title: "",
-        // fullname: "",
-        // designation: "",
-        // company: "",
-        // pannumber: "",
-        // gstnumber: "",
-        // phone: "",
-        // mobilenum: "",
-        // altcontact: "",
-        // wpnumber: "",
-        // emailid: "",
-        // altemailid: "",
-        // weburl: "",
-        // city: "",
-        // country: "",
-        // billaddress: "",
-        // avatar: "",
-        // status: "",
-        // houseaddress: "",
-        // officeaddress: "",
-        // perminantaddress: "",
-        // bankdetails: "",
+        fullname: "",
+        designation: "",
+        company: "",
+        pannumber: "",
+        gstnumber: "",
+        phone: "",
+        mobilenum: "",
+        altcontact: "",
+        wpnumber: "",
+        emailid: "",
+        altemailid: "",
+        weburl: "",
+        city: "",
+        country: "",
+        billaddress: "",
+        avatar: "",
+        status: "",
+        houseaddress: "",
+        officeaddress: "",
+        perminantaddress: "",
+        bankdetails: "",
     });
     const submitHandler = () => {
         console.log(data);
+        post("/scrm-contacts/store", data);
     };
     return (
         <>
@@ -66,6 +70,8 @@ function CreateContact() {
             >
                 <ContactForm
                     data={data}
+                    contactType={contactType}
+                    country={country}
                     setData={setData}
                     saveBtn={"Submit"}
                     submitHandler={submitHandler}

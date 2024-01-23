@@ -40,25 +40,25 @@ Route::middleware('auth')->group(function () {
     Route::get('/scrm-contacts', [ContactController::class, 'index'])->name('contacts.index');
     Route::get('/scrm-contacts/create', [ContactController::class, 'create'])->name('contacts.create');
     Route::post('/scrm-contacts/store', [ContactController::class, 'store'])->name('contacts.store');
-    Route::get('/scrm-contacts/{id}/edit',[ContactController::class, 'edit'])->name('contacts.edit');
+    Route::get('/scrm-contacts/{id}/edit', [ContactController::class, 'edit'])->name('contacts.edit');
     Route::patch('/scrm-contacts/{id}', [ContactController::class, 'update'])->name('contacts.update');
     Route::post('/scrm-contacts/{id}/{asset}', [ContactController::class, 'deleteasset'])->name('contacts.deleteasset');
-    Route::delete('/scrm-contacts/{id}', [ContactController::class, 'destroy']) -> name('contacts.destroy');
+    Route::delete('/scrm-contacts/{id}', [ContactController::class, 'destroy'])->name('contacts.destroy');
 
-    Route::get('/scrm-settings', [SettingController::class, 'index'])->name('settings.index');
-    Route::get('/scrm-settings/create', [SettingController::class, 'create'])->name('settings.create');
-    Route::post('/scrm-settings/store', [SettingController::class, 'store'])->name('settings.store');
-    Route::get('/scrm-settings/{id}/edit',[SettingController::class, 'edit'])->name('settings.edit');
-    Route::patch('/scrm-settings/{id}', [SettingController::class, 'update'])->name('settings.update');
-    Route::delete('/scrm-settings/{id}', [SettingController::class, 'destroy']) -> name('settings.destroy');
+    Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
+    Route::get('/settings-create', [SettingController::class, 'create'])->name('settings.create');
+    Route::post('/settings-store', [SettingController::class, 'store'])->name('settings.store');
+    Route::get('/settings/{id}/edit', [SettingController::class, 'edit'])->name('settings.edit');
+    Route::patch('/settings/{id}', [SettingController::class, 'update'])->name('settings.update');
+    Route::delete('/settings-delete/{id}', [SettingController::class, 'destroy'])->name('settings.destroy');
 
     Route::get('/scrm/settings/logo', [LogoController::class, 'index'])->name('logo.index');
     Route::get('/scrm/settings/logo/show', [LogoController::class, 'show'])->name('logo.show');
     Route::get('/scrm/settings/logo/create', [LogoController::class, 'create'])->name('logo.create');
     Route::post('/scrm/settings/logo/store', [LogoController::class, 'store'])->name('logo.store');
-    Route::get('/scrm/settings/logo/{id}/edit',[LogoController::class, 'edit'])->name('logo.edit');
+    Route::get('/scrm/settings/logo/{id}/edit', [LogoController::class, 'edit'])->name('logo.edit');
     Route::patch('/scrm/settings/logo/{id}', [LogoController::class, 'update'])->name('logo.update');
-    Route::delete('/scrm/settings/logo/{id}', [LogoController::class, 'destroy']) -> name('logo.destroy');
+    Route::delete('/scrm/settings/logo/{id}', [LogoController::class, 'destroy'])->name('logo.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

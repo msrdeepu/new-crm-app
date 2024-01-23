@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
+            $table->string("type")->nullable();
+            $table->string("name")->nullable();
+            $table->string("value")->nullable();
+            $table->string('pcode')->nullable();
+            $table->integer('dorder')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import {
     WhatsAppIcon,
     MailIcon,
@@ -23,7 +22,14 @@ import {
 //btns
 import BtnsItems from "../components/Btns/BtnsItems";
 
-const ContactForm = ({ data, setData, saveBtn, submitHandler }) => {
+const ContactForm = ({
+    data,
+    setData,
+    saveBtn,
+    submitHandler,
+    contactType,
+    country,
+}) => {
     const [form] = Form.useForm();
     const [fullName, setFullName] = useState("");
     const [designation, setDesignation] = useState("");
@@ -40,105 +46,105 @@ const ContactForm = ({ data, setData, saveBtn, submitHandler }) => {
     const [city, setCity] = useState("");
 
     const contactTypeHandler = (value) => {
-        setData(value);
+        setData("ctype", value);
     };
 
     const nameTitleHandler = (value) => {
-        setData(value);
+        setData("title", value);
     };
 
     const fullNameHandler = (e) => {
-        setData(e.target.value);
+        setData("fullname", e.target.value);
         setFullName(e.target.value);
     };
 
     const designationHandler = (e) => {
-        setData(e.target.value);
+        setData("designation", e.target.value);
         setDesignation(e.target.value);
     };
 
     const companyHander = (e) => {
-        setData(e.target.value);
+        setData("company", e.target.value);
         setCompany(e.target.value);
     };
 
     const panNumberHandler = (e) => {
-        setData(e.target.value);
+        setData("pannumber", e.target.value);
         setPanNumber(e.target.value);
     };
 
     const gstHandler = (e) => {
-        setData(e.target.value);
+        setData("gstnumber", e.target.value);
         setGstNumber(e.target.value);
     };
     const phoneNumberHandler = (e) => {
-        setData(e.target.value);
+        setData("phone", e.target.value);
         setPhoneNumberItem(e.target.value);
     };
 
     const mobileHandler = (e) => {
-        setData(e.target.value);
+        setData("mobilenum", e.target.value);
         setMobileNumber(e.target.value);
     };
 
     const altContactNumberHandler = (e) => {
-        setData(e.target.value);
+        setData("altcontact", e.target.value);
         setAltContactNumber(e.target.value);
     };
 
     const whatsAppNumberHandler = (e) => {
-        setData(e.target.value);
+        setData("wpnumber", e.target.value);
         setWhatsAppNumber(e.target.value);
     };
 
     const emailIdHandler = (e) => {
-        setData(e.target.value);
+        setData("emailid", e.target.value);
         setEmailId(e.target.value);
     };
 
     const altEmailHandler = (e) => {
-        setData(e.target.value);
+        setData("altemailid", e.target.value);
         setAltMailId(e.target.value);
     };
 
     const websiteUrlHandler = (e) => {
-        setData(e.target.value);
+        setData("weburl", e.target.value);
         setWebsiteUrl(e.target.value);
     };
 
     const cityHandler = (e) => {
-        setData(e.target.value);
+        setData("city", e.target.value);
         setCity(e.target.value);
     };
 
     const countryHandler = (value) => {
-        setData(value);
+        setData("country", value);
     };
 
     const billingAddressHandler = (value) => {
-        setData(value);
+        setData("billaddress", value);
     };
 
     const avatarHandler = (e) => {
-        setData(e.target.files[0]);
+        setData("avatar", e.target.files[0]);
     };
 
     const statusHandler = (value) => {
-        setData(value);
+        setData("status", value);
     };
 
     const houseAddresHandler = (e) => {
-        setData(e.target.value);
+        setData("houseaddress", e.target.value);
     };
 
     const officeAddressHandler = (e) => {
-        setData(e.target.value);
+        setData("officeaddress", e.target.value);
     };
     const permanentAddressHandler = (e) => {
-        setData(e.target.value);
+        setData("perminantaddress", e.target.value);
     };
     const bankAccountDetailsHandler = (e) => {
-        setData(e.target.value);
+        setData("bankdetails", e.target.value);
     };
 
     let options = [
@@ -147,16 +153,17 @@ const ContactForm = ({ data, setData, saveBtn, submitHandler }) => {
         { value: "Yiminghe", label: "yiminghe" },
     ];
     return (
-        <Form layout="vertical" onFinish={submitHandler} form={form}>
+        <Form layout="vertical" form={form} onFinish={submitHandler}>
             <Row gutter={[8, 4]}>
                 <Col xs={24} md={12}>
                     <CustomSelectItem
                         name={"ctype"}
                         label={"Contact Type"}
-                        data={options}
+                        data={contactType}
                         onChange={contactTypeHandler}
                     />
                 </Col>
+
                 <Col xs={24} md={12}>
                     <Form.Item label="Full Name">
                         <Space.Compact style={{ width: "100%" }}>
@@ -173,7 +180,7 @@ const ContactForm = ({ data, setData, saveBtn, submitHandler }) => {
                             />
                             <Input
                                 name="fullname"
-                                required={true}
+                                required={false}
                                 style={{ width: "80%" }}
                                 showCount
                                 placeholder="Enter Full Name"
@@ -195,14 +202,14 @@ const ContactForm = ({ data, setData, saveBtn, submitHandler }) => {
                         addonBefore={<IdCardIcon color="blue" />}
                         onChange={designationHandler}
                         labelName="designation"
-                        required={true}
+                        required={false}
                         name={"designation"}
                     />
                 </Col>
                 <Col xs={24} md={12}>
                     <CustomInputItem
                         name={"company"}
-                        required={true}
+                        required={false}
                         label="Firm / Company Name"
                         showCount={true}
                         addonBefore={<LoginIcon color="purple" />}
@@ -218,7 +225,7 @@ const ContactForm = ({ data, setData, saveBtn, submitHandler }) => {
                         addonBefore={<CreditCard color="red" />}
                         labelName="pannumber"
                         name={"pannumber"}
-                        required={true}
+                        required={false}
                         validateStatus={panNumber == "" ? "warning" : "success"}
                         onChange={panNumberHandler}
                     />
@@ -250,7 +257,7 @@ const ContactForm = ({ data, setData, saveBtn, submitHandler }) => {
                         }
                         labelName="phone"
                         max={10}
-                        required={true}
+                        required={false}
                     />
                 </Col>
                 <Col xs={24} md={12}>
@@ -361,13 +368,9 @@ const ContactForm = ({ data, setData, saveBtn, submitHandler }) => {
                     <Form.Item label="Country">
                         <Select
                             name="country"
-                            defaultValue="lucy"
+                            defaultValue="Select Country"
                             style={{ width: "100%" }}
-                            options={[
-                                { value: "jack", label: "Jack" },
-                                { value: "lucy", label: "Lucy" },
-                                { value: "Yiminghe", label: "yiminghe" },
-                            ]}
+                            options={country}
                             onChange={countryHandler}
                         />
                     </Form.Item>
@@ -445,11 +448,7 @@ const ContactForm = ({ data, setData, saveBtn, submitHandler }) => {
                     />
                 </Col>
             </Row>
-            <BtnsItems firstText="Add" secondText="Cancel" />
-            {/* <div>
-                <button type="submit">Submit</button>
-                <button type="reset">Cancel</button>
-            </div> */}
+            <BtnsItems firstText={saveBtn} secondText="Cancel" />
         </Form>
     );
 };
