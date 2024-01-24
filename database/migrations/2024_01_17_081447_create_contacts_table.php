@@ -14,12 +14,30 @@ return new class extends Migration
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
             $table->text('contactid');
-            $table->text('fullname');
-            $table->biginteger('age')->nullable();
             $table->string('contype')->nullable();
-            $table->biginteger('role')->nullable();
+            $table->text('title')->nullable();
+            $table->text('fullname');
+            $table->text('designation')->nullable();
             $table->string('company')->nullable();
             $table->string('companycode')->nullable();
+            $table->text('pannumber')->nullable();
+            $table->text('gstnumber')->nullable();
+            $table->bigInteger('phone')->nullable();
+            $table->bigInteger('mobilenum')->nullable();
+            $table->bigInteger('altcontact')->nullable();
+            $table->bigInteger('wpnumber')->nullable();
+            $table->text('emailid')->nullable();
+            $table->text('altemailid')->nullable();
+            $table->text('weburl')->nullable();
+            $table->text('city')->nullable();
+            $table->text('country')->nullable();
+            $table->text('billaddress')->nullable();
+            $table->text('avatar')->nullable();
+            $table->text('status')->nullable();
+            $table->text('houseaddress')->nullable();
+            $table->text('officeaddress')->nullable();
+            $table->text('perminantaddress')->nullable();
+            $table->text('bankdetails')->nullable();
             $table->timestamps();
         });
     }

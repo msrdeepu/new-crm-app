@@ -12,37 +12,51 @@ import {
     logoMarginHeight,
 } from "../components/LogoItem/LogoItem";
 
-function CreateContact({ contactType, country }) {
+function CreateContact({
+    contactType,
+    country,
+    feminine,
+    contactStatus,
+    billingAddress,
+    record,
+}) {
     let contid = uuidv4();
     const { data, setData, post, processing, errors, patch } = useForm({
-        ctype: "",
+        contype: record.contype,
         contactid: contid,
-        title: "",
-        fullname: "",
-        designation: "",
-        company: "",
-        pannumber: "",
-        gstnumber: "",
-        phone: "",
-        mobilenum: "",
-        altcontact: "",
-        wpnumber: "",
-        emailid: "",
-        altemailid: "",
-        weburl: "",
-        city: "",
-        country: "",
-        billaddress: "",
-        avatar: "",
-        status: "",
-        houseaddress: "",
-        officeaddress: "",
-        perminantaddress: "",
-        bankdetails: "",
+        title: record.title,
+        fullname: record.fullname,
+        designation: record.designation,
+        company: record.company,
+        companycode: record.companycode,
+        pannumber: record.pannumber,
+        gstnumber: record.gstnumber,
+        phone: record.phone,
+        mobilenum: record.mobilenum,
+        altcontact: record.altcontact,
+        wpnumber: record.wpnumber,
+        emailid: record.emailid,
+        altemailid: record.altemailid,
+        weburl: record.weburl,
+        city: record.city,
+        country: record.country,
+        billaddress: record.billaddress,
+        avatar: record.avatar,
+        status: record.status,
+        houseaddress: record.houseaddress,
+        officeaddress: record.officeaddress,
+        perminantaddress: record.perminantaddress,
+        bankdetails: record.bankdetails,
     });
     const submitHandler = () => {
         console.log(data);
         post("/scrm-contacts/store", data);
+    };
+    //update form submission
+    const updateHandler = (e) => {
+        console.log(data);
+
+        //patch(`/scrm-contacts/${record.id}`, data);
     };
     return (
         <>
@@ -68,13 +82,19 @@ function CreateContact({ contactType, country }) {
                     </div>
                 }
             >
+                {console.log(record)}
                 <ContactForm
                     data={data}
                     contactType={contactType}
                     country={country}
+                    feminine={feminine}
+                    contactStatus={contactStatus}
+                    billingAddress={billingAddress}
                     setData={setData}
-                    saveBtn={"Submit"}
-                    submitHandler={submitHandler}
+                    saveBtn={record.contype == undefined ? "Add" : "Update"}
+                    submitHandler={
+                        record.id == undefined ? submitHandler : updateHandler
+                    }
                 />
             </Card>
         </>

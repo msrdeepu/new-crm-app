@@ -11,7 +11,7 @@ import {
 } from "../components/Icons/Icons";
 import { Col, Row, Form, Input, Select, Space } from "antd";
 const { TextArea } = Input;
-
+import { Head, Link, router } from "@inertiajs/react";
 //custom form fields
 import {
     CustomInputItem,
@@ -29,11 +29,15 @@ const ContactForm = ({
     submitHandler,
     contactType,
     country,
+    feminine,
+    contactStatus,
+    billingAddress,
 }) => {
     const [form] = Form.useForm();
     const [fullName, setFullName] = useState("");
     const [designation, setDesignation] = useState("");
     const [company, setCompany] = useState("");
+    const [companycode, setCompanycode] = useState("");
     const [panNumber, setPanNumber] = useState("");
     const [gstNumber, setGstNumber] = useState("");
     const [phoneNumberItem, setPhoneNumberItem] = useState();
@@ -46,7 +50,7 @@ const ContactForm = ({
     const [city, setCity] = useState("");
 
     const contactTypeHandler = (value) => {
-        setData("ctype", value);
+        setData("contype", value);
     };
 
     const nameTitleHandler = (value) => {
@@ -63,9 +67,13 @@ const ContactForm = ({
         setDesignation(e.target.value);
     };
 
-    const companyHander = (e) => {
+    const companyHandler = (e) => {
         setData("company", e.target.value);
         setCompany(e.target.value);
+    };
+    const companyCodeHandler = (e) => {
+        setData("companycode", e.target.value);
+        setCompanycode(e.target.value);
     };
 
     const panNumberHandler = (e) => {
@@ -147,18 +155,47 @@ const ContactForm = ({
         setData("bankdetails", e.target.value);
     };
 
-    let options = [
-        { value: "jack", label: "Jack" },
-        { value: "lucy", label: "Lucy" },
-        { value: "Yiminghe", label: "yiminghe" },
-    ];
+    function onCancelHandler(e) {
+        router.get(route("contacts.index"));
+    }
     return (
-        <Form layout="vertical" form={form} onFinish={submitHandler}>
+        <Form
+            layout="vertical"
+            form={form}
+            onFinish={submitHandler}
+            initialValues={{
+                contype: data.contype,
+                title: data.title,
+                fullname: data.fullname,
+                designation: data.designation,
+                company: data.company,
+                companycode: data.companycode,
+                pannumber: data.pannumber,
+                gstnumber: data.gstnumber,
+                phone: data.phone,
+                mobilenum: data.mobilenum,
+                altcontact: data.altcontact,
+                wpnumber: data.wpnumber,
+                emailid: data.emailid,
+                altemailid: data.altemailid,
+                weburl: data.weburl,
+                city: data.city,
+                country: data.country,
+                billaddress: data.billaddress,
+                avatar: data.avatar,
+                status: data.status,
+                houseaddress: data.houseaddress,
+                officeaddress: data.officeaddress,
+                perminantaddress: data.perminantaddress,
+                bankdetails: data.bankdetails,
+            }}
+        >
             <Row gutter={[8, 4]}>
                 <Col xs={24} md={12}>
                     <CustomSelectItem
-                        name={"ctype"}
+                        name={"contype"}
                         label={"Contact Type"}
+                        labelName={"contype"}
                         data={contactType}
                         onChange={contactTypeHandler}
                     />
@@ -169,22 +206,21 @@ const ContactForm = ({
                         <Space.Compact style={{ width: "100%" }}>
                             <Select
                                 name="title"
+                                value={data.title}
                                 onChange={nameTitleHandler}
                                 style={{ width: "20%" }}
-                                defaultValue="Mr"
-                                options={[
-                                    { value: "Mr", label: "Mr" },
-                                    { value: "Ms", label: "Ms" },
-                                    { value: "MrS", label: "MrS" },
-                                ]}
+                                placeholder="Select title"
+                                options={feminine}
                             />
                             <Input
                                 name="fullname"
+                                labelName="fullname"
                                 required={false}
                                 style={{ width: "80%" }}
                                 showCount
                                 placeholder="Enter Full Name"
                                 onChange={fullNameHandler}
+                                value={data.fullname}
                                 validateStatus={
                                     fullName == "" ? "warning" : "success"
                                 }
@@ -200,6 +236,7 @@ const ContactForm = ({
                         }
                         showCount={true}
                         addonBefore={<IdCardIcon color="blue" />}
+                        value={data.designation}
                         onChange={designationHandler}
                         labelName="designation"
                         required={false}
@@ -209,13 +246,27 @@ const ContactForm = ({
                 <Col xs={24} md={12}>
                     <CustomInputItem
                         name={"company"}
+                        labelName="company"
                         required={false}
                         label="Firm / Company Name"
                         showCount={true}
                         addonBefore={<LoginIcon color="purple" />}
-                        validatestatus={company == "" ? "warning" : "success"}
-                        onChange={companyHander}
-                        labelName="companyname"
+                        validateStatus={company == "" ? "warning" : "success"}
+                        onChange={companyHandler}
+                    />
+                </Col>
+                <Col xs={24} md={12}>
+                    <CustomInputItem
+                        name={"companycode"}
+                        required={false}
+                        label="Company Code"
+                        showCount={true}
+                        addonBefore={<LoginIcon color="purple" />}
+                        validateStatus={
+                            companycode == "" ? "warning" : "success"
+                        }
+                        onChange={companyCodeHandler}
+                        labelName="companycode"
                     />
                 </Col>
                 <Col xs={24} md={12}>
@@ -238,7 +289,7 @@ const ContactForm = ({
                         addonBefore={<CreditCard color="red" />}
                         validateStatus={gstNumber == "" ? "warning" : "success"}
                         onChange={gstHandler}
-                        labelName="gst"
+                        labelName="gstnumber"
                         required={false}
                     />
                 </Col>
@@ -268,7 +319,7 @@ const ContactForm = ({
                         showCount={true}
                         addonBefore={<PhoneIcon color="green" />}
                         onChange={mobileHandler}
-                        labelName="mobile"
+                        labelName="mobilenum"
                         required={false}
                         validateStatus={
                             String(mobileNumber).length == 10
@@ -299,7 +350,7 @@ const ContactForm = ({
                         showCount={true}
                         addonBefore={<WhatsAppIcon color="green" />}
                         onChange={whatsAppNumberHandler}
-                        labelName="wpnum"
+                        labelName="wpnumber"
                         required={false}
                         validateStatus={
                             String(whatsAppNumber).length == 10
@@ -316,7 +367,7 @@ const ContactForm = ({
                         showCount={true}
                         addonBefore={<MailIcon color="orange" />}
                         onChange={emailIdHandler}
-                        labelName="mailid"
+                        labelName="emailid"
                         required={false}
                         validateStatus={
                             emailId.includes("@") ? "success" : "warning"
@@ -330,7 +381,7 @@ const ContactForm = ({
                         showCount={true}
                         addonBefore={<MailIcon color="blue" />}
                         onChange={altEmailHandler}
-                        labelName="altmailid"
+                        labelName="altemailid"
                         required={false}
                         validateStatus={
                             altMailId.includes("@") ? "success" : "warning"
@@ -365,60 +416,47 @@ const ContactForm = ({
                 </Col>
 
                 <Col xs={24} md={12}>
-                    <Form.Item label="Country">
-                        <Select
-                            name="country"
-                            defaultValue="Select Country"
-                            style={{ width: "100%" }}
-                            options={country}
-                            onChange={countryHandler}
-                        />
-                    </Form.Item>
+                    <CustomSelectItem
+                        name={"contype"}
+                        label={"Country"}
+                        labelName={"country"}
+                        data={country}
+                        onChange={countryHandler}
+                    />
                 </Col>
-                <Col xs={24} md={12}>
-                    <Form.Item label="Preffered Billing Address / Shipping Address">
-                        <Select
-                            name="billaddress"
-                            defaultValue="lucy"
-                            style={{ width: "100%" }}
-                            options={[
-                                { value: "jack", label: "Jack" },
-                                { value: "lucy", label: "Lucy" },
-                                { value: "Yiminghe", label: "yiminghe" },
-                            ]}
-                            onChange={billingAddressHandler}
-                        />
-                    </Form.Item>
+                <Col xs={24} md={8}>
+                    <CustomSelectItem
+                        name={"billaddress"}
+                        label={"Billing Address"}
+                        labelName={"billaddress"}
+                        data={billingAddress}
+                        onChange={billingAddressHandler}
+                    />
                 </Col>
-                <Col xs={24} md={12}>
-                    <Form.Item label="Image / Avatar">
-                        <CustomInputItem
-                            name={"avatar"}
-                            placeholder="Image / Avatar"
-                            type="file"
-                            onChange={avatarHandler}
-                        />
-                    </Form.Item>
+                <Col xs={24} md={8}>
+                    <CustomInputItem
+                        label="Image / Avatar"
+                        name={"avatar"}
+                        placeholder="Image / Avatar"
+                        type="file"
+                        onChange={avatarHandler}
+                    />
                 </Col>
-                <Col xs={24} md={12}>
-                    <Form.Item label="Status">
-                        <Select
-                            name="status"
-                            defaultValue="lucy"
-                            style={{ width: "100%" }}
-                            options={[
-                                { value: "jack", label: "Jack" },
-                                { value: "lucy", label: "Lucy" },
-                                { value: "Yiminghe", label: "yiminghe" },
-                            ]}
-                            onChange={statusHandler}
-                        />
-                    </Form.Item>
+                <Col xs={24} md={8}>
+                    <CustomSelectItem
+                        name={"status"}
+                        label={"Status"}
+                        placeholder="Select Status"
+                        labelName={"status"}
+                        data={contactStatus}
+                        onChange={statusHandler}
+                    />
                 </Col>
                 <Col xs={24} md={12}>
                     <CustomTextArea
                         name={"houseaddress"}
                         label="House Address"
+                        labelName={"houseaddress"}
                         showCount={true}
                         onChange={houseAddresHandler}
                     />
@@ -426,6 +464,7 @@ const ContactForm = ({
                 <Col xs={24} md={12}>
                     <CustomTextArea
                         name={"officeaddress"}
+                        labelName={"officeaddress"}
                         label="Office Address"
                         showCount={true}
                         onChange={officeAddressHandler}
@@ -434,6 +473,7 @@ const ContactForm = ({
                 <Col xs={24} md={12}>
                     <CustomTextArea
                         name={"perminantaddress"}
+                        labelName={"perminantaddress"}
                         label="Permanent Address"
                         showCount={true}
                         onChange={permanentAddressHandler}
@@ -442,13 +482,18 @@ const ContactForm = ({
                 <Col xs={24} md={12}>
                     <CustomTextArea
                         name={"bankdetails"}
+                        labelName={"bankdetails"}
                         label="Bank Account Details"
                         showCount={true}
                         onChange={bankAccountDetailsHandler}
                     />
                 </Col>
             </Row>
-            <BtnsItems firstText={saveBtn} secondText="Cancel" />
+            <BtnsItems
+                firstText={saveBtn}
+                secondText="Cancel"
+                cancelForm={onCancelHandler}
+            />
         </Form>
     );
 };

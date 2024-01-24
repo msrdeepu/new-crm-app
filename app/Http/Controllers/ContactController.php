@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use App\Models\Contact;
 use App\Models\ContactDetails;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,10 @@ class ContactController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Contacts/ContactsList');
+        $contactList = Contact::get(['*', 'id AS key']);
+        return Inertia::render('Contacts/ContactsList', [
+            'contactList' => $contactList
+        ]);
     }
 
     /**
@@ -25,10 +29,16 @@ class ContactController extends Controller
     {
         $contactType = Setting::where('type', '=', 'contact',)->where('status', '=', 'active')->get(['name AS label', 'value', 'id AS key']);
         $country = Setting::where('type', '=', 'country',)->where('status', '=', 'active')->get(['name AS label', 'value', 'id AS key']);
+        $feminine = Setting::where('type', '=', 'feminine',)->where('status', '=', 'active')->get(['name AS label', 'value', 'id AS key']);
+        $contactStatus = Setting::where('type', '=', 'contact-status',)->where('status', '=', 'active')->get(['name AS label', 'value', 'id AS key']);
+        $billingAddress = Setting::where('type', '=', 'billing-address',)->where('status', '=', 'active')->get(['name AS label', 'value', 'id AS key']);
         return Inertia::render('Contacts/CreateContact', [
             'record' => new Contact(),
             'contactType' => $contactType,
             'country' => $country,
+            'feminine' => $feminine,
+            'contactStatus' => $contactStatus,
+            'billingAddress' => $billingAddress
         ]);
     }
 
@@ -38,30 +48,6 @@ class ContactController extends Controller
     public function store(Request $request)
     {
 
-        // ctype: "",
-        // contactid: contid,
-        // title: "",
-        // fullname: "",
-        // designation: "",
-        // company: "",
-        // pannumber: "",
-        // gstnumber: "",
-        // phone: "",
-        // mobilenum: "",
-        // altcontact: "",
-        // wpnumber: "",
-        // emailid: "",
-        // altemailid: "",
-        // weburl: "",
-        // city: "",
-        // country: "",
-        // billaddress: "",
-        // avatar: "",
-        // status: "",
-        // houseaddress: "",
-        // officeaddress: "",
-        // perminantaddress: "",
-        // bankdetails: "",
         //dd($request);
         $avatar = null;
         $requestData = $request->all();
@@ -71,23 +57,8 @@ class ContactController extends Controller
             $requestData['avatar'] = $avatar;
         }
 
-        $contact = Contact::create([
-            'contactid' => $request->input('contactid'),
-            'fullname' => $request->input('fullname'),
-            'age' => $request->input('age'),
-            'contype' => $request->input('contype'),
-            'role' => $request->input('role'),
-            'company' => $request->input('company'),
-            'companycode' => $request->input('companycode'),
-
-        ]);
-
-        $contact->ContactDetails()->create([
-            'contactid' => $request->input('contact_id'),
-            'title' => $request->input('title'),
-            // other contact details fields
-        ]);
-        // $data->save();
+        $data = Contact::create($requestData);
+        $data->save();
 
         return to_route('contacts.index');
     }
@@ -103,9 +74,24 @@ class ContactController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Contact $contact)
+    public function edit(Contact $contact, $id)
     {
-        return Inertia::render('Contacts/CreateContact');
+        $contactList = Contact::get(['*', 'id AS key']);
+        $contact = Contact::find($id);
+        $contactType = Setting::where('type', '=', 'contact',)->where('status', '=', 'active')->get(['name AS label', 'value', 'id AS key']);
+        $country = Setting::where('type', '=', 'country',)->where('status', '=', 'active')->get(['name AS label', 'value', 'id AS key']);
+        $feminine = Setting::where('type', '=', 'feminine',)->where('status', '=', 'active')->get(['name AS label', 'value', 'id AS key']);
+        $contactStatus = Setting::where('type', '=', 'contact-status',)->where('status', '=', 'active')->get(['name AS label', 'value', 'id AS key']);
+        $billingAddress = Setting::where('type', '=', 'billing-address',)->where('status', '=', 'active')->get(['name AS label', 'value', 'id AS key']);
+        return Inertia::render('Contacts/CreateContact', [
+            'contactType' => $contactType,
+            'country' => $country,
+            'feminine' => $feminine,
+            'contactStatus' => $contactStatus,
+            'billingAddress' => $billingAddress,
+            'contactList' => $contactList,
+            'record' => $contact,
+        ]);
     }
 
     /**
@@ -116,11 +102,31 @@ class ContactController extends Controller
         //
     }
 
+    // delete page assets
+    public function deleteasset($id, $asset)
+    {
+        $contact = Contact::find($id);
+
+        switch ($asset) {
+            case ('avatar'):
+                Storage::delete('public' . $contact->avatar);
+                $contact->update(["avatar" => null]);
+                break;
+            default:
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Contact $contact)
+    public function destroy(Contact $contact, $id)
     {
-        //
+        $contact = Contact::find($id);
+
+        if ($contact->avatar != "") {
+            Storage::delete('public' . $contact->avatar);
+        }
+
+        $contact->delete();
     }
 }
