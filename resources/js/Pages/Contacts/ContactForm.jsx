@@ -9,7 +9,7 @@ import {
     CreditCard,
     LoginIcon,
 } from "../components/Icons/Icons";
-import { Col, Row, Form, Input, Select, Space } from "antd";
+import { Col, Row, Form, Input, Select, Space, Button, Image } from "antd";
 const { TextArea } = Input;
 import { Head, Link, router } from "@inertiajs/react";
 //custom form fields
@@ -32,6 +32,7 @@ const ContactForm = ({
     feminine,
     contactStatus,
     billingAddress,
+    record,
 }) => {
     const [form] = Form.useForm();
     const [fullName, setFullName] = useState("");
@@ -48,6 +49,30 @@ const ContactForm = ({
     const [altMailId, setAltMailId] = useState("");
     const [websiteUrl, setWebsiteUrl] = useState("");
     const [city, setCity] = useState("");
+
+    let avatar = "";
+    if (record.avatar != null) {
+        avatar = (
+            <>
+                {console.log(record.avatar)}
+
+                <Image
+                    style={{
+                        borderRadius: "50%",
+                        height: "80px",
+                        width: "8",
+                    }}
+                    src={`/storage/${record.avatar}`}
+                />
+                <Link href={`/scrm-contacts/${record.id}/avatar`} method="post">
+                    <Button className="rounded bg-red-500 text-white p-2">
+                        Delete
+                    </Button>{" "}
+                    <br />
+                </Link>
+            </>
+        );
+    }
 
     const contactTypeHandler = (value) => {
         setData("contype", value);
@@ -281,6 +306,7 @@ const ContactForm = ({
                         onChange={panNumberHandler}
                     />
                 </Col>
+                {console.log(data)}
                 <Col xs={24} md={12}>
                     <CustomInputItem
                         label="GST Number"
@@ -434,10 +460,13 @@ const ContactForm = ({
                     />
                 </Col>
                 <Col xs={24} md={8}>
+                    {avatar}
+
                     <CustomInputItem
                         label="Image / Avatar"
+                        htmlFor="avatar"
+                        //labelName={"avatar"}
                         name={"avatar"}
-                        placeholder="Image / Avatar"
                         type="file"
                         onChange={avatarHandler}
                     />

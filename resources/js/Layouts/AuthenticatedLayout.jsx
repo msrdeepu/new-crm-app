@@ -21,6 +21,9 @@ import {
     Avatar,
 } from "antd";
 import { IoSettings } from "react-icons/io5";
+import { SiGoogleadsense } from "react-icons/si";
+import { MdSpaceDashboard } from "react-icons/md";
+import { MdOutlineContacts } from "react-icons/md";
 
 const { Header, Sider, Content } = Layout;
 
@@ -80,7 +83,7 @@ export default function Authenticated({ header, children }) {
                     items={[
                         {
                             key: "dashboard",
-                            icon: <UserOutlined />,
+                            icon: <MdSpaceDashboard />,
                             label: (
                                 <Link href={window.route("dashboard")}>
                                     Dashboard
@@ -89,10 +92,19 @@ export default function Authenticated({ header, children }) {
                         },
                         {
                             key: "contacts",
-                            icon: <UsergroupAddOutlined />,
+                            icon: <MdOutlineContacts />,
                             label: (
                                 <Link href={window.route("contacts.index")}>
                                     Contacts
+                                </Link>
+                            ),
+                        },
+                        {
+                            key: "business-leads",
+                            icon: <SiGoogleadsense />,
+                            label: (
+                                <Link href={window.route("leads.index")}>
+                                    Leads
                                 </Link>
                             ),
                         },

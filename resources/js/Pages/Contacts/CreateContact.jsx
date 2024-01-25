@@ -55,8 +55,7 @@ function CreateContact({
     //update form submission
     const updateHandler = (e) => {
         console.log(data);
-
-        //patch(`/scrm-contacts/${record.id}`, data);
+        patch(`/scrm-contacts/${record.id}`, data);
     };
     return (
         <>
@@ -82,9 +81,10 @@ function CreateContact({
                     </div>
                 }
             >
-                {console.log(record)}
+                {/* {console.log(record)} */}
                 <ContactForm
                     data={data}
+                    record={record}
                     contactType={contactType}
                     country={country}
                     feminine={feminine}

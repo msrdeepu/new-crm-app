@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Contact;
-use App\Models\ContactDetails;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Setting;
 use Illuminate\Http\Request;
@@ -97,9 +96,20 @@ class ContactController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Contact $contact)
+    public function update(Request $request, Contact $contact, $id)
     {
-        //
+        dd($request);
+        $contact = Contact::find($id);
+        $avatar = null;
+        $requestData = $request->all();
+        if ($request->file('avatar')) {
+            Storage::delete('public' . $contact->avatar);
+            $avatar = $request->file('avatar')->store('contacts', 'public');
+            $requestData['avatar'] = $avatar;
+        }
+
+        $updated = $contact->update($requestData);
+        return to_route('contacts.index');
     }
 
     // delete page assets

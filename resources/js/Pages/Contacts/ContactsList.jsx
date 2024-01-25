@@ -278,7 +278,7 @@ function ContactsList({ props, contactList }) {
                         New Contact
                     </Button>
                 </Link>
-                {console.log(contactList)}
+                {/* {console.log(contactList)} */}
                 <Table
                     className="tableItem"
                     columns={columns}

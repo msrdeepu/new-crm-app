@@ -4,6 +4,7 @@ use App\Http\Controllers\LogoController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\BusinessleadController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -44,6 +45,14 @@ Route::middleware('auth')->group(function () {
     Route::patch('/scrm-contacts/{id}', [ContactController::class, 'update'])->name('contacts.update');
     Route::post('/scrm-contacts/{id}/{asset}', [ContactController::class, 'deleteasset'])->name('contacts.deleteasset');
     Route::delete('/scrm-contacts/{id}', [ContactController::class, 'destroy'])->name('contacts.destroy');
+
+    Route::get('/scrm-business-leads', [BusinessleadController::class, 'index'])->name('leads.index');
+    Route::get('/scrm-business-leads/create', [BusinessleadController::class, 'create'])->name('leads.create');
+    Route::post('/scrm-business-leads/store', [BusinessleadController::class, 'store'])->name('leads.store');
+    Route::get('/scrm-business-leads/{id}/edit', [BusinessleadController::class, 'edit'])->name('leads.edit');
+    Route::patch('/scrm-business-leads/{id}', [BusinessleadController::class, 'update'])->name('leads.update');
+    Route::post('/scrm-business-leads/{id}/{asset}', [BusinessleadController::class, 'deleteasset'])->name('leads.deleteasset');
+    Route::delete('/scrm-business-leads/{id}', [BusinessleadController::class, 'destroy'])->name('leads.destroy');
 
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::get('/settings-create', [SettingController::class, 'create'])->name('settings.create');
