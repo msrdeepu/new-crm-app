@@ -13,11 +13,23 @@ import {
 import LeadForm from "./LeadForm";
 
 function CreateLead() {
-    let contid = uuidv4();
-    const { data, setData, post, processing, errors, patch } = useForm({});
+    let leadId = uuidv4();
+    const { data, setData, post, processing, errors, patch } = useForm({
+        leadId: leadId,
+        title: "",
+        leadowner: "",
+        leadmanager: "",
+        leadsource: "",
+        industry: "",
+        status: "",
+        rating: "",
+        contactdate: "",
+        annualrevenue: "",
+        details: "",
+    });
     const submitHandler = () => {
         console.log(data);
-        post("/scrm-contacts/store", data);
+        post("/scrm-business-leads/store", data);
     };
     //update form submission
     const updateHandler = (e) => {
@@ -49,7 +61,11 @@ function CreateLead() {
                 }
             >
                 {/* {console.log(record)} */}
-                <LeadForm />
+                <LeadForm
+                    submitHandler={submitHandler}
+                    data={data}
+                    setData={setData}
+                />
             </Card>
         </>
     );

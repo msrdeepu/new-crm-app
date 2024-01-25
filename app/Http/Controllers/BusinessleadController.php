@@ -16,8 +16,10 @@ class BusinessleadController extends Controller
      */
     public function index()
     {
-        //$contactList = Contact::get(['*', 'id AS key']);
-        return Inertia::render('BusinessLeads/LeadList');
+        $leadList = Businesslead::get(['*', 'id AS key']);
+        return Inertia::render('BusinessLeads/LeadList', [
+            'leadList' => $leadList,
+        ]);
     }
 
     /**
@@ -25,7 +27,9 @@ class BusinessleadController extends Controller
      */
     public function create()
     {
-        return Inertia::render('BusinessLeads/CreateLead');
+        return Inertia::render('BusinessLeads/CreateLead', [
+            'record' => new Contact(),
+        ]);
     }
 
     /**
@@ -33,7 +37,12 @@ class BusinessleadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request);
+        $requestData = $request->all();
+        $data = Businesslead::create($requestData);
+        $data->save();
+
+        return to_route('leads.index');
     }
 
     /**

@@ -25,41 +25,41 @@ import {
 //btns
 import BtnsItems from "../components/Btns/BtnsItems";
 
-const LeadForm = () => {
+const LeadForm = ({ data, setData, submitHandler }) => {
     const [form] = Form.useForm();
     const [title, setTitle] = useState("");
     const [details, setDetails] = useState("");
 
     const titleHandler = (e) => {
-        setTitle(e.target.value);
-        console.log(e.target.value);
+        setData("title", e.target.value);
+        //console.log(e.target.value);
     };
     const leadOwnerHandler = (value) => {
-        console.log(value);
+        setData("leadowner", value);
     };
     const leadManagerHandler = (value) => {
-        console.log(value);
+        setData("leadmanager", value);
     };
     const leadSourceHandler = (value) => {
-        console.log(value);
+        setData("leadsource", value);
     };
     const leadIndustryHandler = (value) => {
-        console.log(value);
+        setData("industry", value);
     };
     const leadStatusHandler = (value) => {
-        console.log(value);
+        setData("status", value);
     };
     const leadRatingHandler = (value) => {
-        console.log(value);
+        setData("rating", value);
     };
     const contactDateHandler = (e) => {
-        console.log(e.target.value);
+        setData("contactdate", e.target.value);
     };
     const annualRevenueHandler = (e) => {
-        console.log(e.target.value);
+        setData("annualrevenue", e.target.value);
     };
     const detailHandler = (html) => {
-        console.log(html);
+        setData("details", html);
         setDetails(html);
     };
     const onCancelData = () => {
@@ -67,9 +67,9 @@ const LeadForm = () => {
         router.get(route("leads.index"));
     };
     return (
-        <Form form={form} layout="vertical">
+        <Form form={form} layout="vertical" onFinish={submitHandler}>
             <Row gutter={[8, 4]}>
-                <Col xs={24} md={12}>
+                <Col xs={24} md={8}>
                     <CustomInputItem
                         label="Title"
                         showCount={true}
@@ -82,7 +82,7 @@ const LeadForm = () => {
                         validateStatus={title == "" ? "warning" : "success"}
                     />
                 </Col>
-                <Col xs={24} md={12}>
+                <Col xs={24} md={8}>
                     <CustomSelectItem
                         name={"leadowner"}
                         label={"Lead Owner"}
@@ -95,7 +95,7 @@ const LeadForm = () => {
                         onChange={leadOwnerHandler}
                     />
                 </Col>
-                <Col xs={24} md={12}>
+                <Col xs={24} md={8}>
                     <CustomSelectItem
                         name={"leadmanager"}
                         label={"Lead Manager"}
@@ -108,7 +108,7 @@ const LeadForm = () => {
                         onChange={leadManagerHandler}
                     />
                 </Col>
-                <Col xs={24} md={12}>
+                <Col xs={24} md={8}>
                     <CustomSelectItem
                         name={"leadsource"}
                         label={"Lead Source"}
@@ -121,7 +121,7 @@ const LeadForm = () => {
                         onChange={leadSourceHandler}
                     />
                 </Col>
-                <Col xs={24} md={12}>
+                <Col xs={24} md={8}>
                     <CustomSelectItem
                         name={"industry"}
                         label={"Lead Industry"}
@@ -134,7 +134,7 @@ const LeadForm = () => {
                         onChange={leadIndustryHandler}
                     />
                 </Col>
-                <Col xs={24} md={12}>
+                <Col xs={24} md={8}>
                     <CustomSelectItem
                         name={"status"}
                         label={"Lead Status"}
@@ -182,6 +182,7 @@ const LeadForm = () => {
                 <Col xs={24}>
                     <label>Details</label>
                     <ReactQuill
+                        name="details"
                         theme="snow"
                         value={details}
                         onChange={detailHandler}

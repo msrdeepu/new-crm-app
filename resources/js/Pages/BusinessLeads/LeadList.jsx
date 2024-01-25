@@ -20,7 +20,7 @@ import {
 } from "../components/LogoItem/LogoItem";
 import "../../../css/styles.css";
 
-function LeadList(props) {
+function LeadList({ props, leadList }) {
     const activityIcon = {
         color: "orange",
     };
@@ -38,35 +38,35 @@ function LeadList(props) {
 
         {
             title: "Owner",
-            // dataIndex: "fullname",
-            // ...getColumnSearchProps("fullname"),
+            dataIndex: "leadowner",
+            // ...getColumnSearchProps("leadowner"),
         },
 
         {
             title: "Manager",
-            // dataIndex: "phone",
+            dataIndex: "leadmanager",
             // ...getColumnSearchProps("phone"),
         },
 
         {
             title: "Source",
-            // dataIndex: "company",
+            dataIndex: "leadsource",
             // ...getColumnSearchProps("company"),
         },
         {
             title: "Status",
-            // dataIndex: "role",
+            dataIndex: "status",
             // ...getColumnSearchProps("role"),
         },
         {
             title: "Rating",
-            // dataIndex: "contype",
+            dataIndex: "rating",
             // ...getColumnSearchProps("contype"),
         },
 
         {
             title: "Connected On",
-            // dataIndex: "status",
+            dataIndex: "contactdate",
             // ...getColumnSearchProps("status"),
         },
 
@@ -99,8 +99,8 @@ function LeadList(props) {
                             shape="circle"
                             danger
                             type="primary"
-                            // id={record.id}
-                            // onClick={destroyRecord}
+                            id={record.id}
+                            onClick={destroyRecord}
                         >
                             {<DeleteOutlined />}
                         </Button>
@@ -117,11 +117,12 @@ function LeadList(props) {
 
     function destroyRecord(e) {
         if (confirm("Are you sure you want to delete this record ?")) {
-            router.delete(route("contacts.destroy", e.currentTarget.id));
+            router.delete(route("leads.destroy", e.currentTarget.id));
         }
     }
     return (
         <>
+            {/* {console.log(leadList)} */}
             <Head title="Dashboard" />
 
             <Card
@@ -148,7 +149,7 @@ function LeadList(props) {
                 <Table
                     className="tableItem"
                     columns={columns}
-                    dataSource={[{ key: 1, id: 1, title: "Sandeep" }]}
+                    dataSource={leadList}
                 />
             </Card>
         </>
