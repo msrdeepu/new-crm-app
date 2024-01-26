@@ -51,8 +51,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/scrm-business-leads/store', [BusinessleadController::class, 'store'])->name('leads.store');
     Route::get('/scrm-business-leads/{id}/edit', [BusinessleadController::class, 'edit'])->name('leads.edit');
     Route::patch('/scrm-business-leads/{id}', [BusinessleadController::class, 'update'])->name('leads.update');
-    Route::post('/scrm-business-leads/{id}/{asset}', [BusinessleadController::class, 'deleteasset'])->name('leads.deleteasset');
     Route::delete('/scrm-business-leads/{id}', [BusinessleadController::class, 'destroy'])->name('leads.destroy');
+    //leads-activity-routes
+    Route::get('/scrm-business-leads/{id}/activity', [BusinessleadController::class, 'activity'])->name('leads.activity');
+    Route::post('/scrm-business-leads/activity/store', [BusinessleadController::class, 'storeactivity'])->name('leads.storeactivity');
 
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::get('/settings-create', [SettingController::class, 'create'])->name('settings.create');

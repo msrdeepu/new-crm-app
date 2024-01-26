@@ -98,7 +98,7 @@ class ContactController extends Controller
      */
     public function update(Request $request, Contact $contact, $id)
     {
-        dd($request);
+        //dd($request);
         $contact = Contact::find($id);
         $avatar = null;
         $requestData = $request->all();

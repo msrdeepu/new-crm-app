@@ -7,7 +7,9 @@ use App\Models\Contact;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Setting;
 use App\Models\Businesslead;
+use App\Models\Leadactivity;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class BusinessleadController extends Controller
 {
@@ -56,17 +58,30 @@ class BusinessleadController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Businesslead $businesslead)
+    public function edit(Businesslead $businesslead, $id)
     {
-        return Inertia::render('BusinessLeads/CreateLead');
+        $leadList = Businesslead::get(['*', 'id AS key']);
+        $lead = Businesslead::find($id);
+        return Inertia::render('BusinessLeads/CreateLead', [
+            'leadList' => $leadList,
+            'record' => $lead,
+        ]);
     }
+
+
+
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Businesslead $businesslead)
+    public function update(Request $request, Businesslead $businesslead, $id)
     {
-        //
+        //dd($request);
+        $lead = Businesslead::find($id);
+        $requestData = $request->all();
+        $updated = $lead->update($requestData);
+        return to_route('leads.index');
     }
 
     /**
@@ -75,6 +90,29 @@ class BusinessleadController extends Controller
     public function destroy(Businesslead $businesslead, $id)
     {
         Businesslead::find($id)->delete();
+        return to_route('leads.index');
+    }
+
+    //activity management
+    public function activity(Request $request,  Businesslead $businesslead, $id)
+    {
+        $leadActivityList = Leadactivity::get(['*', 'id AS key']);
+        $leadList = Businesslead::get(['*', 'id AS key']);
+        $lead = Businesslead::find($id);
+        return Inertia::render('BusinessLeads/LeadActivity', [
+            'leadList' => $leadList,
+            'record' => $lead,
+            'leadActivityList' => $leadActivityList,
+        ]);
+    }
+
+    //store activity of leads in database
+    public function storeactivity(Request $request)
+    {
+        //dd($request);
+        $requestData = $request->all();
+        $data = Leadactivity::create($requestData);
+        $data->save();
         return to_route('leads.index');
     }
 }

@@ -25,7 +25,7 @@ import {
 //btns
 import BtnsItems from "../components/Btns/BtnsItems";
 
-const LeadForm = ({ data, setData, submitHandler }) => {
+const LeadForm = ({ data, setData, submitHandler, record, saveBtn }) => {
     const [form] = Form.useForm();
     const [title, setTitle] = useState("");
     const [details, setDetails] = useState("");
@@ -67,7 +67,23 @@ const LeadForm = ({ data, setData, submitHandler }) => {
         router.get(route("leads.index"));
     };
     return (
-        <Form form={form} layout="vertical" onFinish={submitHandler}>
+        <Form
+            form={form}
+            layout="vertical"
+            onFinish={submitHandler}
+            initialValues={{
+                title: data.title,
+                leadowner: data.leadowner,
+                leadmanager: data.leadmanager,
+                leadsource: data.leadsource,
+                industry: data.industry,
+                status: data.status,
+                rating: data.rating,
+                contactdate: data.contactdate,
+                annualrevenue: data.annualrevenue,
+                details: data.details,
+            }}
+        >
             <Row gutter={[8, 4]}>
                 <Col xs={24} md={8}>
                     <CustomInputItem
@@ -184,13 +200,13 @@ const LeadForm = ({ data, setData, submitHandler }) => {
                     <ReactQuill
                         name="details"
                         theme="snow"
-                        value={details}
+                        value={record.id == undefined ? details : data.details}
                         onChange={detailHandler}
                     />
                 </Col>
             </Row>
             <BtnsItems
-                firstText={"Save"}
+                firstText={saveBtn}
                 secondText={"Cancel"}
                 cancelForm={onCancelData}
             />

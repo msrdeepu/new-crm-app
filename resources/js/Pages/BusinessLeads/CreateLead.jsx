@@ -12,20 +12,20 @@ import {
 } from "../components/LogoItem/LogoItem";
 import LeadForm from "./LeadForm";
 
-function CreateLead() {
+function CreateLead({ leadList, record }) {
     let leadId = uuidv4();
     const { data, setData, post, processing, errors, patch } = useForm({
         leadId: leadId,
-        title: "",
-        leadowner: "",
-        leadmanager: "",
-        leadsource: "",
-        industry: "",
-        status: "",
-        rating: "",
-        contactdate: "",
-        annualrevenue: "",
-        details: "",
+        title: record.title,
+        leadowner: record.leadowner,
+        leadmanager: record.leadmanager,
+        leadsource: record.leadsource,
+        industry: record.industry,
+        status: record.status,
+        rating: record.rating,
+        contactdate: record.contactdate,
+        annualrevenue: record.annualrevenue,
+        details: record.details,
     });
     const submitHandler = () => {
         console.log(data);
@@ -34,7 +34,7 @@ function CreateLead() {
     //update form submission
     const updateHandler = (e) => {
         console.log(data);
-        patch(`/scrm-contacts/${record.id}`, data);
+        patch(`/scrm-business-leads/${record.id}`, data);
     };
     return (
         <>
@@ -62,7 +62,11 @@ function CreateLead() {
             >
                 {/* {console.log(record)} */}
                 <LeadForm
-                    submitHandler={submitHandler}
+                    record={record}
+                    submitHandler={
+                        record.id == undefined ? submitHandler : updateHandler
+                    }
+                    saveBtn={record.id == undefined ? "Add" : "Update"}
                     data={data}
                     setData={setData}
                 />

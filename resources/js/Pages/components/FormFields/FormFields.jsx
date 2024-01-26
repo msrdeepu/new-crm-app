@@ -11,6 +11,7 @@ export const CustomInputItem = ({
     addonBefore,
     value,
     onChange,
+    onBlur,
     required,
     type,
     max,
@@ -45,6 +46,7 @@ export const CustomInputItem = ({
                 addonBefore={addonBefore}
                 value={value}
                 onChange={onChange}
+                onBlur={onBlur}
                 type={type}
             />
         </Form.Item>
