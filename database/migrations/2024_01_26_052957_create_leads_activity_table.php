@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('Leadactivities', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('leadid');
+            $table->text('leadid');
             $table->string('title');
             $table->string('status')->nullable();
             $table->string('rating')->nullable();

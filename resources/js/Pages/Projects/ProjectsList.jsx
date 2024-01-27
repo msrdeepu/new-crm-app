@@ -1,16 +1,16 @@
 import { useState, useRef } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, router } from "@inertiajs/react";
-import { Card, Button, Table, Space, Tooltip, Input } from "antd";
-
+import { Card, Button, Table, Input, Space, Image, Tooltip } from "antd";
 import {
     PlusCircleOutlined,
     SearchOutlined,
     EditOutlined,
     DeleteOutlined,
 } from "@ant-design/icons";
-import { MdOutlineTimer } from "react-icons/md";
+import { MdOutlinePendingActions } from "react-icons/md";
 import Highlighter from "react-highlight-words";
+
 import {
     logoSrc,
     logoWidth,
@@ -19,8 +19,7 @@ import {
     logoMarginHeight,
 } from "../components/LogoItem/LogoItem";
 import "../../../css/styles.css";
-
-function LeadList({ props, leadList }) {
+function ProjectsList({ props, projectList }) {
     const [searchText, setSearchText] = useState("");
     const [searchedColumn, setSearchedColumn] = useState("");
     const searchInput = useRef(null);
@@ -144,10 +143,9 @@ function LeadList({ props, leadList }) {
                 text
             ),
     });
-    const activityIcon = {
-        color: "orange",
-        fontSize: "18px",
-    };
+    {
+        console.log(projectList);
+    }
     const columns = [
         {
             title: "ID",
@@ -156,42 +154,41 @@ function LeadList({ props, leadList }) {
         },
         {
             title: "Title",
-            dataIndex: "title",
-            ...getColumnSearchProps("title"),
+            dataIndex: "ptitle",
+            ...getColumnSearchProps("ptitle"),
         },
 
         {
-            title: "Owner",
-            dataIndex: "leadowner",
-            ...getColumnSearchProps("leadowner"),
+            title: "Type",
+            dataIndex: "ptype",
+            ...getColumnSearchProps("ptype"),
         },
 
-        {
-            title: "Manager",
-            dataIndex: "leadmanager",
-            ...getColumnSearchProps("leadmanager"),
-        },
-
-        {
-            title: "Source",
-            dataIndex: "leadsource",
-            ...getColumnSearchProps("leadsource"),
-        },
         {
             title: "Status",
-            dataIndex: "status",
-            ...getColumnSearchProps("status"),
+            dataIndex: "pstatus",
+            ...getColumnSearchProps("pstatus"),
         },
         {
-            title: "Rating",
-            dataIndex: "rating",
-            ...getColumnSearchProps("rating"),
+            title: "Budget",
+            dataIndex: "pbudget",
+            ...getColumnSearchProps("pbudget"),
         },
 
         {
-            title: "Connected On",
-            dataIndex: "contactdate",
-            ...getColumnSearchProps("contactdate"),
+            title: "Start Date",
+            dataIndex: "stdate",
+            ...getColumnSearchProps("stdate"),
+        },
+        {
+            title: "End Date",
+            dataIndex: "duedate",
+            ...getColumnSearchProps("duedate"),
+        },
+        {
+            title: "Assigned",
+            dataIndex: "assignto",
+            ...getColumnSearchProps("assignto"),
         },
 
         {
@@ -199,36 +196,29 @@ function LeadList({ props, leadList }) {
             dataIndex: "actions",
             render: (_, record) => (
                 <Space>
-                    <Tooltip placement="top" title={"Edit Lead"}>
+                    <Tooltip placement="top" title={"Edit Project"}>
                         <Button
                             shape="circle"
-                            type="primary"
                             id={record.id}
                             onClick={editRecord}
                         >
                             {<EditOutlined />}
                         </Button>
                     </Tooltip>
-                    <Tooltip placement="top" title={"Manage Activity"}>
-                        <Button
-                            shape="circle"
-                            id={record.id}
-                            onClick={activityRecord}
-                            style={activityIcon}
-                        >
-                            {<MdOutlineTimer />}
-                        </Button>
-                    </Tooltip>
-                    <Tooltip placement="top" title={"Delete Lead"}>
+                    <Tooltip placement="top" title={"Delete Project"}>
                         <Button
                             shape="circle"
                             danger
-                            type="primary"
-                            id={record.id}
                             onClick={destroyRecord}
+                            id={record.id}
                         >
                             {<DeleteOutlined />}
-                        </Button>
+                        </Button>{" "}
+                    </Tooltip>
+                    <Tooltip placement="top" title={"Manage Tasks"}>
+                        <Button shape="circle" type="primary">
+                            {<MdOutlinePendingActions />}
+                        </Button>{" "}
                     </Tooltip>
                 </Space>
             ),
@@ -237,20 +227,16 @@ function LeadList({ props, leadList }) {
 
     //Loading Edit View
     function editRecord(e) {
-        router.get(route("leads.edit", e.currentTarget.id));
-    }
-    function activityRecord(e) {
-        router.get(route("leads.activity", e.currentTarget.id));
+        router.get(route("projects.edit", e.currentTarget.id));
     }
 
     function destroyRecord(e) {
         if (confirm("Are you sure you want to delete this record ?")) {
-            router.delete(route("leads.destroy", e.currentTarget.id));
+            router.delete(route("projects.destroy", e.currentTarget.id));
         }
     }
     return (
         <>
-            {/* {console.log(leadList)} */}
             <Head title="Dashboard" />
 
             <Card
@@ -268,22 +254,22 @@ function LeadList({ props, leadList }) {
                     </div>
                 }
             >
-                <Link href={window.route("leads.create")} type="button">
+                <Link href={window.route("projects.create")} type="button">
                     <Button type="primary" icon={<PlusCircleOutlined />}>
-                        New Lead
+                        New Project
                     </Button>
                 </Link>
-
+                {/* {console.log(contactList)} */}
                 <Table
                     className="tableItem"
                     columns={columns}
-                    dataSource={leadList}
+                    dataSource={projectList}
                 />
             </Card>
         </>
     );
 }
 
-LeadList.layout = (page) => <AuthenticatedLayout children={page} />;
+ProjectsList.layout = (page) => <AuthenticatedLayout children={page} />;
 
-export default LeadList;
+export default ProjectsList;

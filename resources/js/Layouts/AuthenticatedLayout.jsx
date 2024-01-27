@@ -24,6 +24,7 @@ import { IoSettings } from "react-icons/io5";
 import { SiGoogleadsense } from "react-icons/si";
 import { MdSpaceDashboard } from "react-icons/md";
 import { MdOutlineContacts } from "react-icons/md";
+import { GrTechnology } from "react-icons/gr";
 
 const { Header, Sider, Content } = Layout;
 
@@ -105,6 +106,15 @@ export default function Authenticated({ header, children }) {
                             label: (
                                 <Link href={window.route("leads.index")}>
                                     Leads
+                                </Link>
+                            ),
+                        },
+                        {
+                            key: "projects",
+                            icon: <GrTechnology />,
+                            label: (
+                                <Link href={window.route("projects.index")}>
+                                    Projects
                                 </Link>
                             ),
                         },

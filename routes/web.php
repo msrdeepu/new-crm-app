@@ -5,6 +5,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\BusinessleadController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -55,6 +56,19 @@ Route::middleware('auth')->group(function () {
     //leads-activity-routes
     Route::get('/scrm-business-leads/{id}/activity', [BusinessleadController::class, 'activity'])->name('leads.activity');
     Route::post('/scrm-business-leads/activity/store', [BusinessleadController::class, 'storeactivity'])->name('leads.storeactivity');
+
+
+    //project management routes
+    Route::get('/scrm-projects', [ProjectController::class, 'index'])->name('projects.index');
+    Route::get('/scrm-projects/create', [ProjectController::class, 'create'])->name('projects.create');
+    Route::post('/scrm-projects/store', [ProjectController::class, 'store'])->name('projects.store');
+    Route::get('/scrm-projects/{id}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
+    Route::patch('/scrm-projects/{id}', [ProjectController::class, 'update'])->name('projects.update');
+    Route::delete('/scrm-projects/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
+    //leads-activity-routes
+    Route::get('/scrm-projects/{id}/activity', [ProjectController::class, 'activity'])->name('projects.activity');
+    Route::post('/scrm-projects/activity/store', [ProjectController::class, 'storeactivity'])->name('projects.storeactivity');
+    //project management routes completed
 
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::get('/settings-create', [SettingController::class, 'create'])->name('settings.create');

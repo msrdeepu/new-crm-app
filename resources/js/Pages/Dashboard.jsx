@@ -1,6 +1,6 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
-import { Card, Typography } from "antd";
+import { Card, Typography, Progress } from "antd";
 
 function Dashboard(props) {
     return (
@@ -8,7 +8,7 @@ function Dashboard(props) {
             <Head title="Dashboard" />
 
             <Card title={`Welcome, ${props.auth.user.name}`}>
-                <Typography.Text>You're logged in!</Typography.Text>
+                <Progress type="dashboard" strokeColor={"red"} percent={80} />
             </Card>
         </>
     );
