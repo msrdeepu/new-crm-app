@@ -15,8 +15,8 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 const ProjectForm = ({ data, setData, submitHandler, record, saveBtn }) => {
     const [form] = Form.useForm();
-    const [startDateTime, setDueDateTime] = useState("");
-    const [dueDateTime, setStartDateTime] = useState("");
+    const [startDateTime, setStartDateTime] = useState("");
+    const [dueDateTime, setDueDateTime] = useState("");
     const [details, setDetails] = useState("");
     const [pTitle, setPTitle] = useState("");
 

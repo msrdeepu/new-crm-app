@@ -25,6 +25,7 @@ import { SiGoogleadsense } from "react-icons/si";
 import { MdSpaceDashboard } from "react-icons/md";
 import { MdOutlineContacts } from "react-icons/md";
 import { GrTechnology } from "react-icons/gr";
+import { MdAddTask } from "react-icons/md";
 
 const { Header, Sider, Content } = Layout;
 
@@ -115,6 +116,15 @@ export default function Authenticated({ header, children }) {
                             label: (
                                 <Link href={window.route("projects.index")}>
                                     Projects
+                                </Link>
+                            ),
+                        },
+                        {
+                            key: "tasks",
+                            icon: <MdAddTask />,
+                            label: (
+                                <Link href={window.route("tasks.index")}>
+                                    Tasks
                                 </Link>
                             ),
                         },

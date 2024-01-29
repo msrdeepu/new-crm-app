@@ -30,7 +30,7 @@ class BusinessleadController extends Controller
     public function create()
     {
         return Inertia::render('BusinessLeads/CreateLead', [
-            'record' => new Contact(),
+            'record' => new Businesslead(),
         ]);
     }
 

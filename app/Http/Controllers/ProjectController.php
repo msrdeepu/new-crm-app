@@ -24,7 +24,9 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Projects/CreateProject');
+        return Inertia::render('Projects/CreateProject', [
+            'record' => new Project(),
+        ]);
     }
 
     /**
