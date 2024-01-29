@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\BusinessleadController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -82,6 +83,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/scrm-tasks/{id}/duration', [TaskController::class, 'duration'])->name('tasks.duration');
     Route::post('/scrm-tasks/duration/store', [TaskController::class, 'storeduration'])->name('tasks.storeduration');
     //task management routes completed
+
+    Route::get('/scrm-employees', [EmployeeController::class, 'index'])->name('employees.index');
+    Route::get('/scrm-employees/create', [EmployeeController::class, 'create'])->name('employees.create');
+    Route::post('/scrm-employees/store', [EmployeeController::class, 'store'])->name('employees.store');
+    Route::get('/scrm-employees/{id}/edit', [EmployeeController::class, 'edit'])->name('employees.edit');
+    Route::patch('/scrm-employees/{id}', [EmployeeController::class, 'update'])->name('employees.update');
+    Route::delete('/scrm-employees/delete/{id}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
 
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::get('/settings-create', [SettingController::class, 'create'])->name('settings.create');

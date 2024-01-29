@@ -26,6 +26,7 @@ import { MdSpaceDashboard } from "react-icons/md";
 import { MdOutlineContacts } from "react-icons/md";
 import { GrTechnology } from "react-icons/gr";
 import { MdAddTask } from "react-icons/md";
+import { FaUserCog } from "react-icons/fa";
 
 const { Header, Sider, Content } = Layout;
 
@@ -125,6 +126,15 @@ export default function Authenticated({ header, children }) {
                             label: (
                                 <Link href={window.route("tasks.index")}>
                                     Tasks
+                                </Link>
+                            ),
+                        },
+                        {
+                            key: "employees",
+                            icon: <FaUserCog />,
+                            label: (
+                                <Link href={window.route("employees.index")}>
+                                    Employees
                                 </Link>
                             ),
                         },
