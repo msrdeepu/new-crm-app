@@ -8,6 +8,7 @@ import {
     EditOutlined,
     DeleteOutlined,
 } from "@ant-design/icons";
+import { FaInfoCircle } from "react-icons/fa";
 import Highlighter from "react-highlight-words";
 
 import {
@@ -225,11 +226,23 @@ function ContactsList({ props, contactList }) {
         {
             title: "Actions",
             dataIndex: "actions",
-            render: (_, record) => (
+            render: (_, record, index) => (
                 <Space>
                     <Button shape="circle" id={record.id} onClick={editRecord}>
                         {<EditOutlined />}
                     </Button>
+                    {/* {contactList[index].contype == "employee" ? (
+                        <Button
+                            id={record.id}
+                            shape="circle"
+                            type="primary"
+                            onClick={editEmployeeInfoRecord}
+                        >
+                            {<FaInfoCircle />}
+                        </Button>
+                    ) : (
+                        ""
+                    )} */}
 
                     <Button
                         shape="circle"
@@ -243,10 +256,16 @@ function ContactsList({ props, contactList }) {
             ),
         },
     ];
+    {
+        console.log(contactList);
+    }
 
     //Loading Edit View
     function editRecord(e) {
         router.get(route("contacts.edit", e.currentTarget.id));
+    }
+    function editEmployeeInfoRecord(e) {
+        router.get(route("contacts.employinfo", e.currentTarget.id));
     }
 
     function destroyRecord(e) {

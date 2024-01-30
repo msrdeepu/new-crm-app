@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Contact;
+use App\Models\Employee;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Setting;
 use Illuminate\Http\Request;
@@ -55,6 +56,12 @@ class ContactController extends Controller
             $avatar = $request->file('avatar')->store('contacts', 'public');
             $requestData['avatar'] = $avatar;
         }
+
+        // if ($requestData ->contype === 'employee') {
+        //     Employee::create([
+        //         'empId' => $request->id,
+        //     ]);
+        // }
 
         $data = Contact::create($requestData);
         $data->save();
@@ -138,5 +145,15 @@ class ContactController extends Controller
         }
 
         $contact->delete();
+    }
+
+    public function employinfo($id)
+    {
+        $contactList = Contact::get(['*', 'id AS key']);
+        $contact = Contact::find($id);
+        return Inertia::render('Contacts/CreateContact', [
+            'contactList' => $contactList,
+            'record' => $contact,
+        ]);
     }
 }

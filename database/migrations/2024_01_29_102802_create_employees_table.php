@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->text('empId');
-            $table->string('fullname');
+            $table->unsignedBigInteger('empId');
+            $table->foreign('empId')->references('id')->on('contacts')->onDelete('cascade');
             $table->text('dob')->nullable();
             $table->string('marstatus')->nullable();
             $table->string('bloodgroup')->nullable();

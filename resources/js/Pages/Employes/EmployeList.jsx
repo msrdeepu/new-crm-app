@@ -9,6 +9,7 @@ import {
     EditOutlined,
     DeleteOutlined,
 } from "@ant-design/icons";
+
 import { MdOutlineTimer } from "react-icons/md";
 import Highlighter from "react-highlight-words";
 import {
@@ -20,7 +21,7 @@ import {
 } from "../components/LogoItem/LogoItem";
 import "../../../css/styles.css";
 
-function EmployeList({ props }) {
+function EmployeList({ props, mainData }) {
     const [searchText, setSearchText] = useState("");
     const [searchedColumn, setSearchedColumn] = useState("");
     const searchInput = useRef(null);
@@ -150,48 +151,37 @@ function EmployeList({ props }) {
     };
     const columns = [
         {
-            title: "ID",
-            dataIndex: "id",
-            ...getColumnSearchProps("id"),
+            title: "Employee Id",
+            dataIndex: "empId",
+            ...getColumnSearchProps("contactid"),
         },
         {
-            title: "Title",
-            // dataIndex: "title",
-            // ...getColumnSearchProps("title"),
-        },
-
-        {
-            title: "Owner",
-            // dataIndex: "leadowner",
-            // ...getColumnSearchProps("leadowner"),
+            title: "Full Name",
+            dataIndex: "fullname",
+            ...getColumnSearchProps("fullname"),
         },
 
         {
-            title: "Manager",
-            // dataIndex: "leadmanager",
-            // ...getColumnSearchProps("leadmanager"),
+            title: "Mobile",
+            dataIndex: "mobilenum",
+            ...getColumnSearchProps("mobilenum"),
         },
 
         {
-            title: "Source",
-            // dataIndex: "leadsource",
-            // ...getColumnSearchProps("leadsource"),
+            title: "Department",
+            dataIndex: "department",
+            ...getColumnSearchProps("department"),
+        },
+
+        {
+            title: "Role",
+            dataIndex: "role",
+            ...getColumnSearchProps("role"),
         },
         {
             title: "Status",
-            // dataIndex: "status",
-            // ...getColumnSearchProps("status"),
-        },
-        {
-            title: "Rating",
-            // dataIndex: "rating",
-            // ...getColumnSearchProps("rating"),
-        },
-
-        {
-            title: "Connected On",
-            // dataIndex: "contactdate",
-            // ...getColumnSearchProps("contactdate"),
+            dataIndex: "status",
+            ...getColumnSearchProps("status"),
         },
 
         {
@@ -199,7 +189,7 @@ function EmployeList({ props }) {
             dataIndex: "actions",
             render: (_, record) => (
                 <Space>
-                    <Tooltip placement="top" title={"Edit Lead"}>
+                    <Tooltip placement="top" title={"Edit Employee"}>
                         <Button
                             shape="circle"
                             type="primary"
@@ -209,7 +199,7 @@ function EmployeList({ props }) {
                             {<EditOutlined />}
                         </Button>
                     </Tooltip>
-                    <Tooltip placement="top" title={"Manage Activity"}>
+                    {/* <Tooltip placement="top" title={"Manage Activity"}>
                         <Button
                             shape="circle"
                             // id={record.id}
@@ -218,8 +208,8 @@ function EmployeList({ props }) {
                         >
                             {<MdOutlineTimer />}
                         </Button>
-                    </Tooltip>
-                    <Tooltip placement="top" title={"Delete Lead"}>
+                    </Tooltip> */}
+                    {/* <Tooltip placement="top" title={"Delete Employee"}>
                         <Button
                             shape="circle"
                             danger
@@ -229,7 +219,7 @@ function EmployeList({ props }) {
                         >
                             {<DeleteOutlined />}
                         </Button>
-                    </Tooltip>
+                    </Tooltip> */}
                 </Space>
             ),
         },
@@ -237,7 +227,7 @@ function EmployeList({ props }) {
 
     //Loading Edit View
     function editRecord(e) {
-        router.get(route("leads.edit", e.currentTarget.id));
+        router.get(route("employees.edit", e.currentTarget.id));
     }
     function activityRecord(e) {
         router.get(route("leads.activity", e.currentTarget.id));
@@ -268,19 +258,19 @@ function EmployeList({ props }) {
                     </div>
                 }
             >
-                <Link href={window.route("employees.create")} type="button">
+                {/* <Link href={window.route("employees.create")} type="button">
                     <Button type="primary" icon={<PlusCircleOutlined />}>
                         New Employee
                     </Button>
-                </Link>
+                </Link> */}
 
                 <Table
                     className="tableItem"
                     columns={columns}
-                    //dataSource={leadList}
-                    dataSource={[{ id: 1 }, { id: 2 }]}
+                    dataSource={mainData}
                 />
             </Card>
+            {console.log(mainData)}
         </>
     );
 }

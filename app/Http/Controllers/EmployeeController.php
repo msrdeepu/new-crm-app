@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use App\Models\Employee;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -13,8 +15,13 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //$resource = Employee::get(['*', 'id AS key']);
-        return Inertia::render('Employes/EmployeList');
+        $empData = DB::table('contacts')->where('contype', 'employee')
+            ->join('employees', 'contacts.id', '=', 'employees.empId')
+            ->select('contacts.*', 'employees.*')->get();
+
+        return Inertia::render('Employes/EmployeList', [
+            'mainData' => $empData,
+        ]);
     }
 
     /**
@@ -22,6 +29,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
+
         return Inertia::render('Employes/CreateEmploye');
     }
 
@@ -30,6 +38,7 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
+
         //dd($request);
         $requestData = $request->all();
         $data = Employee::create($requestData);
@@ -49,24 +58,27 @@ class EmployeeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Employee $employee)
+    public function edit(Employee $employee, $id)
     {
-        return Inertia::render('Employes/CreateEmploye');
+
+        return Inertia::render('Employes/InfoEdit');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Employee $employee)
+    public function update(Request $request, Employee $employee, $id)
     {
-        //
+
+        return to_route('employes.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Employee $employee)
+    public function destroy(Employee $employee, $id)
     {
-        //
+        Employee::find($id)->delete();
+        return to_route('employes.index');
     }
 }

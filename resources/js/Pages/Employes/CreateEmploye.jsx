@@ -15,8 +15,7 @@ import EmployeForm from "./EmployeForm";
 function CreateEmploye({ props }) {
     let empId = uuidv4();
     const { data, setData, post, processing, errors, patch } = useForm({
-        empId: empId,
-        fullname: "",
+        // empId: "",
         dob: "",
         marstatus: "",
         bloodgroup: "",
@@ -41,13 +40,14 @@ function CreateEmploye({ props }) {
     });
     const submitHandler = () => {
         console.log(data);
-        post("/scrm-employees/store", data);
+        //post("/scrm-employees/store", data);
     };
     //update form submission
     const updateHandler = (e) => {
         console.log(data);
         //patch(`/scrm-employees/${record.id}`, data);
     };
+
     return (
         <>
             <Head />
@@ -79,6 +79,7 @@ function CreateEmploye({ props }) {
                     //     record.id == undefined ? submitHandler : updateHandler
                     // }
                     // saveBtn={record.id == undefined ? "Add" : "Update"}
+
                     saveBtn={"Save"}
                     submitHandler={submitHandler}
                     data={data}

@@ -47,7 +47,13 @@ import {
 //btns
 import BtnsItems from "../components/Btns/BtnsItems";
 
-const EmployeForm = ({ data, setData, submitHandler, record, saveBtn }) => {
+const EmployeForm = ({
+    data,
+    setData,
+    submitHandler,
+
+    saveBtn,
+}) => {
     const [form] = Form.useForm();
     const [title, setTitle] = useState("");
     const [details, setDetails] = useState("");
@@ -141,10 +147,11 @@ const EmployeForm = ({ data, setData, submitHandler, record, saveBtn }) => {
             <Row gutter={[8, 4]}>
                 <Col xs={24} md={8}>
                     <CustomInputItem
-                        labelName={"fullname"}
+                        //labelName={"fullname"}
                         label={"Full Name"}
-                        name={"fullname"}
-                        onChange={fullnameHandler}
+                        //value={record.fullname}
+                        //name={"fullname"}
+                        //onChange={fullnameHandler}
                     />
                 </Col>
 
