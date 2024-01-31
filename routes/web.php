@@ -7,6 +7,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\BusinessleadController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\EstimateController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -84,6 +85,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/scrm-tasks/{id}/duration', [TaskController::class, 'duration'])->name('tasks.duration');
     Route::post('/scrm-tasks/duration/store', [TaskController::class, 'storeduration'])->name('tasks.storeduration');
     //task management routes completed
+
+    //estimates management
+    Route::get('/scrm-estimates', [EstimateController::class, 'index'])->name('estimates.index');
+    Route::get('/scrm-estimates/create', [EstimateController::class, 'create'])->name('estimates.create');
+    Route::post('/scrm-estimates/store', [EstimateController::class, 'store'])->name('estimates.store');
+    Route::get('/scrm-estimates/{id}/edit', [EstimateController::class, 'edit'])->name('estimates.edit');
+    Route::patch('/scrm-estimates/{id}', [EstimateController::class, 'update'])->name('estimates.update');
+    Route::delete('/scrm-estimates/{id}', [EstimateController::class, 'destroy'])->name('estimates.destroy');
+    //estimates management
 
     Route::get('/scrm-employees', [EmployeeController::class, 'index'])->name('employees.index');
     Route::get('/scrm-employees/create', [EmployeeController::class, 'create'])->name('employees.create');

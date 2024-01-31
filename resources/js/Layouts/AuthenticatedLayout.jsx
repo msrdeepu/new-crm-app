@@ -27,6 +27,7 @@ import { MdOutlineContacts } from "react-icons/md";
 import { GrTechnology } from "react-icons/gr";
 import { MdAddTask } from "react-icons/md";
 import { FaUserCog } from "react-icons/fa";
+import { FaFileInvoice } from "react-icons/fa6";
 
 const { Header, Sider, Content } = Layout;
 
@@ -126,6 +127,15 @@ export default function Authenticated({ header, children }) {
                             label: (
                                 <Link href={window.route("tasks.index")}>
                                     Tasks
+                                </Link>
+                            ),
+                        },
+                        {
+                            key: "estimates",
+                            icon: <FaFileInvoice />,
+                            label: (
+                                <Link href={window.route("estimates.index")}>
+                                    Estimates
                                 </Link>
                             ),
                         },

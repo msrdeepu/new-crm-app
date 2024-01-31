@@ -47,13 +47,7 @@ import {
 //btns
 import BtnsItems from "../components/Btns/BtnsItems";
 
-const EmployeForm = ({
-    data,
-    setData,
-    submitHandler,
-
-    saveBtn,
-}) => {
+const EmployeForm = ({ data, setData, submitHandler, record, saveBtn }) => {
     const [form] = Form.useForm();
     const [title, setTitle] = useState("");
     const [details, setDetails] = useState("");
@@ -143,17 +137,44 @@ const EmployeForm = ({
     };
 
     return (
-        <Form form={form} layout="vertical" onFinish={submitHandler}>
+        <Form
+            form={form}
+            layout="vertical"
+            onFinish={submitHandler}
+            initialValues={{
+                dob: data.dob,
+                marstatus: data.marstatus,
+                bloodgroup: data.bloodgroup,
+                physicchallenged: data.physicchallenged,
+                nationality: data.nationality,
+                passportno: data.passportno,
+                joindate: data.joindate,
+                probationenddate: data.probationenddate,
+                department: data.department,
+                role: data.role,
+                reportingto: data.reportingto,
+                prevworkexp: data.prevworkexp,
+                salarymode: data.salarymode,
+                salary: data.salary,
+                currentstatus: data.currentstatus,
+                resignedon: data.resignedon,
+                resignationreason: data.resignationreason,
+                emergperson: data.emergperson,
+                personrelation: data.personrelation,
+                emergcontact: data.emergcontact,
+                insurenceno: data.insurenceno,
+            }}
+        >
             <Row gutter={[8, 4]}>
-                <Col xs={24} md={8}>
+                {/* <Col xs={24} md={8}>
                     <CustomInputItem
                         //labelName={"fullname"}
                         label={"Full Name"}
-                        //value={record.fullname}
+                        value={record.fullname}
                         //name={"fullname"}
                         //onChange={fullnameHandler}
                     />
-                </Col>
+                </Col> */}
 
                 <Col xs={24} md={8}>
                     <CustomInputItem
@@ -361,7 +382,7 @@ const EmployeForm = ({
                         onChange={personRelationHandler}
                     />
                 </Col>
-                <Col xs={24} md={8}>
+                <Col xs={24} md={12}>
                     <CustomInputItem
                         labelName={"emergcontact"}
                         label={"Emergency Contact Number"}
@@ -371,7 +392,7 @@ const EmployeForm = ({
                     />
                 </Col>
 
-                <Col xs={24} md={8}>
+                <Col xs={24} md={12}>
                     <CustomInputItem
                         labelName={"insurenceno"}
                         name={"insurenceno"}

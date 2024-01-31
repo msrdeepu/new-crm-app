@@ -12,11 +12,12 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
+
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('empId');
-            $table->foreign('empId')->references('id')->on('contacts')->onDelete('cascade');
+            $table->unsignedBigInteger('contact_id');
+            $table->foreign('contact_id')->references('id')->on('contacts')->onDelete('cascade');
             $table->text('dob')->nullable();
             $table->string('marstatus')->nullable();
             $table->string('bloodgroup')->nullable();

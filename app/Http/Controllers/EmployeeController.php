@@ -16,7 +16,7 @@ class EmployeeController extends Controller
     public function index()
     {
         $empData = DB::table('contacts')->where('contype', 'employee')
-            ->join('employees', 'contacts.id', '=', 'employees.empId')
+            ->join('employees', 'contacts.id', '=', 'employees.contact_id')
             ->select('contacts.*', 'employees.*')->get();
 
         return Inertia::render('Employes/EmployeList', [
@@ -60,8 +60,13 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee, $id)
     {
+        $employeList = Employee::get(['*', 'id AS key']);
+        $employee = Employee::find($id);
+        return Inertia::render('Employes/CreateEmploye', [
+            'employeList' => $employeList,
+            'record' => $employee
 
-        return Inertia::render('Employes/InfoEdit');
+        ]);
     }
 
     /**
@@ -69,8 +74,20 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, Employee $employee, $id)
     {
+        //dd($request);
 
-        return to_route('employes.index');
+        $emp = Employee::find($id);
+        dd($emp);
+        $emp->dob = $request->query('dob');
+        $emp->marstatus = $request->query('marstatus');
+        $emp->bloodgroup = $request->query('bloodgroup');
+        $emp->update();
+
+        //bulk assign
+        // $requestData = $request->all();
+        // $emp->update($requestData);
+
+        return to_route('employees.index');
     }
 
     /**
@@ -79,6 +96,6 @@ class EmployeeController extends Controller
     public function destroy(Employee $employee, $id)
     {
         Employee::find($id)->delete();
-        return to_route('employes.index');
+        return to_route('employees.index');
     }
 }

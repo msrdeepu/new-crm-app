@@ -10,10 +10,12 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Employee extends Model
 {
     use HasFactory;
-    protected $fillable = ['empId'];
+    protected $fillable = ['contact_id'];
+
+    protected $guarded = [''];
 
     public function contact()
     {
-        return $this->belongsTo(Contact::class);
+        return $this->belongsTo(Contact::class, 'contact_id');
     }
 }

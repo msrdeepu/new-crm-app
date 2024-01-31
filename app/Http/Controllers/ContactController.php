@@ -57,14 +57,22 @@ class ContactController extends Controller
             $requestData['avatar'] = $avatar;
         }
 
-        // if ($requestData ->contype === 'employee') {
-        //     Employee::create([
-        //         'empId' => $request->id,
-        //     ]);
-        // }
+        $requestData = $request->all();
 
-        $data = Contact::create($requestData);
-        $data->save();
+        // Upload and store the avatar image
+        if ($request->hasFile('avatar')) {
+            $avatarPath = $request->file('avatar')->store('contacts', 'public');
+            $requestData['avatar'] = $avatarPath;
+        }
+
+        // Create the contact record
+        $contact = Contact::create($requestData);
+
+        if ($request->contype === 'employee') {
+            // Create a record in the employees table with the contact_id
+            Employee::create(['contact_id' => $contact->id]);
+        }
+
 
         return to_route('contacts.index');
     }

@@ -9,7 +9,6 @@ import {
     EditOutlined,
     DeleteOutlined,
 } from "@ant-design/icons";
-
 import { MdOutlineTimer } from "react-icons/md";
 import Highlighter from "react-highlight-words";
 import {
@@ -21,7 +20,7 @@ import {
 } from "../components/LogoItem/LogoItem";
 import "../../../css/styles.css";
 
-function EmployeList({ props, mainData }) {
+function EstimateList() {
     const [searchText, setSearchText] = useState("");
     const [searchedColumn, setSearchedColumn] = useState("");
     const searchInput = useRef(null);
@@ -151,43 +150,48 @@ function EmployeList({ props, mainData }) {
     };
     const columns = [
         {
-            title: "Employee Id",
-            dataIndex: "contact_id",
-            key: "id",
-            ...getColumnSearchProps("contactid"),
+            title: "ID",
+            // dataIndex: "id",
+            // ...getColumnSearchProps("id"),
         },
         {
-            title: "Full Name",
-            dataIndex: "fullname",
-            key: "id",
-            ...getColumnSearchProps("fullname"),
+            title: "Title",
+            // dataIndex: "title",
+            // ...getColumnSearchProps("title"),
         },
 
         {
-            title: "Mobile",
-            dataIndex: "mobilenum",
-            key: "id",
-            ...getColumnSearchProps("mobilenum"),
+            title: "Owner",
+            // dataIndex: "leadowner",
+            // ...getColumnSearchProps("leadowner"),
         },
 
         {
-            title: "Department",
-            dataIndex: "department",
-            key: "id",
-            ...getColumnSearchProps("department"),
+            title: "Manager",
+            // dataIndex: "leadmanager",
+            // ...getColumnSearchProps("leadmanager"),
         },
 
         {
-            title: "Role",
-            dataIndex: "role",
-            key: "id",
-            ...getColumnSearchProps("role"),
+            title: "Source",
+            // dataIndex: "leadsource",
+            // ...getColumnSearchProps("leadsource"),
         },
         {
             title: "Status",
-            dataIndex: "status",
-            key: "id",
-            ...getColumnSearchProps("status"),
+            // dataIndex: "status",
+            // ...getColumnSearchProps("status"),
+        },
+        {
+            title: "Rating",
+            // dataIndex: "rating",
+            // ...getColumnSearchProps("rating"),
+        },
+
+        {
+            title: "Connected On",
+            // dataIndex: "contactdate",
+            // ...getColumnSearchProps("contactdate"),
         },
 
         {
@@ -195,27 +199,18 @@ function EmployeList({ props, mainData }) {
             dataIndex: "actions",
             render: (_, record) => (
                 <Space>
-                    <Tooltip placement="top" title={"Edit Employee"}>
+                    <Tooltip placement="top" title={"Edit Estimate"}>
                         <Button
                             shape="circle"
                             type="primary"
-                            id={record.id}
-                            onClick={editRecord}
+                            // id={record.id}
+                            // onClick={editRecord}
                         >
                             {<EditOutlined />}
                         </Button>
                     </Tooltip>
-                    {/* <Tooltip placement="top" title={"Manage Activity"}>
-                        <Button
-                            shape="circle"
-                            // id={record.id}
-                            // onClick={activityRecord}
-                            style={activityIcon}
-                        >
-                            {<MdOutlineTimer />}
-                        </Button>
-                    </Tooltip> */}
-                    {/* <Tooltip placement="top" title={"Delete Employee"}>
+
+                    <Tooltip placement="top" title={"Delete Estimate"}>
                         <Button
                             shape="circle"
                             danger
@@ -225,7 +220,7 @@ function EmployeList({ props, mainData }) {
                         >
                             {<DeleteOutlined />}
                         </Button>
-                    </Tooltip> */}
+                    </Tooltip>
                 </Space>
             ),
         },
@@ -233,15 +228,12 @@ function EmployeList({ props, mainData }) {
 
     //Loading Edit View
     function editRecord(e) {
-        router.get(route("employees.edit", e.currentTarget.id));
-    }
-    function activityRecord(e) {
-        router.get(route("leads.activity", e.currentTarget.id));
+        router.get(route("estimates.edit", e.currentTarget.id));
     }
 
     function destroyRecord(e) {
         if (confirm("Are you sure you want to delete this record ?")) {
-            router.delete(route("leads.destroy", e.currentTarget.id));
+            router.delete(route("estimates.destroy", e.currentTarget.id));
         }
     }
     return (
@@ -264,22 +256,22 @@ function EmployeList({ props, mainData }) {
                     </div>
                 }
             >
-                {/* <Link href={window.route("employees.create")} type="button">
+                <Link href={window.route("estimates.create")} type="button">
                     <Button type="primary" icon={<PlusCircleOutlined />}>
-                        New Employee
+                        New Estimate
                     </Button>
-                </Link> */}
+                </Link>
 
                 <Table
                     className="tableItem"
                     columns={columns}
-                    dataSource={mainData}
+                    // dataSource={leadList}
                 />
             </Card>
         </>
     );
 }
 
-EmployeList.layout = (page) => <AuthenticatedLayout children={page} />;
+EstimateList.layout = (page) => <AuthenticatedLayout children={page} />;
 
-export default EmployeList;
+export default EstimateList;
