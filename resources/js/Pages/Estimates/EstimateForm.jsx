@@ -134,6 +134,7 @@ const EstimateForm = ({
     const [flatDisplay, setFlatDisplay] = useState(false);
     const [flatValue, setFlatValue] = useState();
     const [totalAmount, setTotalAmount] = useState();
+    const [taxList, setTaxList] = useState([]);
 
     const handleAddItem = () => {
         const amount = parseFloat(data.price) * parseInt(data.quantity);
@@ -183,6 +184,20 @@ const EstimateForm = ({
     const flatDiscountHandler = (e) => {
         let flatDisountAmount = Number(e.target.value);
         setTotalAmount(subTotal - flatDisountAmount);
+    };
+
+    const taxValuesHandler = (value) => {
+        //setTaxList(Number(value));
+        let taxListValues = [value];
+        //console.log(taxListValues);
+
+        // let sumOfValue = 0;
+
+        // // Iterate over each item in the array, convert it to a number, and sum all numbers
+        // for (let i = 0; i < taxListValues.length; i++) {
+        //     sumOfValue += parseFloat(taxListValues[i]);
+        // }
+        console.log(taxListValues);
     };
 
     return (
@@ -475,7 +490,7 @@ const EstimateForm = ({
                         labelName={"tax"}
                         label={"Tax Mode"}
                         data={taxMode}
-                        onChange={(value) => console.log(value)}
+                        onChange={taxValuesHandler}
                     />
                 </Col>
                 <Col xs={24} md={flatDisplay == true ? 8 : 12}>
