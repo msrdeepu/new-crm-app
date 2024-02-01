@@ -30,11 +30,13 @@ import {
 } from "../components/LogoItem/LogoItem";
 import EstimateForm from "./EstimateForm";
 
-function CreateEstimate() {
+function CreateEstimate({ discount, taxMode }) {
     const [estId, setEstId] = useState(generateUniqueID());
 
-    const { data, setData, post, processing, errors, patch } = useForm({
+    const { data, setData, post, processing, errors, patch, reset } = useForm({
         estimateId: estId,
+        products: [],
+        subTotal: "",
         // title: record.title,
         // leadowner: record.leadowner,
         // leadmanager: record.leadmanager,
@@ -57,6 +59,7 @@ function CreateEstimate() {
         console.log(data);
         patch(`/scrm-estimates/${record.id}`, data);
     };
+
     return (
         <>
             <Head />
@@ -81,16 +84,17 @@ function CreateEstimate() {
                     </div>
                 }
             >
-                <h2>{estId}</h2>
                 {/* {console.log(record)} */}
                 <EstimateForm
+                    discount={discount}
+                    taxMode={taxMode}
                     // record={record}
                     // submitHandler={
                     //     record.id == undefined ? submitHandler : updateHandler
                     // }
                     // saveBtn={record.id == undefined ? "Add" : "Update"}
-                    // data={data}
-                    // setData={setData}
+                    data={data}
+                    setData={setData}
                     estId={estId}
                     submitHandler={submitHandler}
                 />

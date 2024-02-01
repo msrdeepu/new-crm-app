@@ -62,6 +62,8 @@ export const CustomSelectItem = ({
     onChange,
     required,
     width,
+    mode,
+    maxCount,
 }) => {
     return (
         <Form.Item
@@ -86,6 +88,8 @@ export const CustomSelectItem = ({
                 placeholder={`Select ${label}`}
                 style={{ width: `${width}` }}
                 onChange={onChange}
+                mode={mode}
+                maxCount={maxCount}
             >
                 {data.map((option, index) => (
                     <Option key={index} value={option.value}>

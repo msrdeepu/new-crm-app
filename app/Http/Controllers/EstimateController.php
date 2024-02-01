@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use App\Models\Estimate;
 use Illuminate\Http\Request;
+use App\Models\Setting;
 
 class EstimateController extends Controller
 {
@@ -21,7 +22,12 @@ class EstimateController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Estimates/CreateEstimate');
+        $discount = Setting::where('type', '=', 'discount',)->where('status', '=', 'active')->get(['name AS label', 'value', 'id AS key']);
+        $taxMode = Setting::where('type', '=', 'taxmode',)->where('status', '=', 'active')->get(['name AS label', 'value', 'id AS key']);
+        return Inertia::render('Estimates/CreateEstimate', [
+            'discount' => $discount,
+            'taxMode' => $taxMode
+        ]);
     }
 
     /**
