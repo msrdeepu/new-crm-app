@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     WhatsAppIcon,
     MailIcon,
@@ -134,7 +134,11 @@ const EstimateForm = ({
     const [flatDisplay, setFlatDisplay] = useState(false);
     const [flatValue, setFlatValue] = useState();
     const [totalAmount, setTotalAmount] = useState();
-    const [taxList, setTaxList] = useState([]);
+    const [totalTax, setTotalTax] = useState();
+    const [totalAfterAddTax, setToatalAfterAddTax] = useState();
+    const [shippingCharges, setShippingCharges] = useState();
+    const [grandTotal, setGrandTotal] = useState();
+    const [dueAmount, setDueAmount] = useState();
 
     const handleAddItem = () => {
         const amount = parseFloat(data.price) * parseInt(data.quantity);
@@ -171,9 +175,9 @@ const EstimateForm = ({
             const percentage = parseInt(value);
             setSelectedPercentage(percentage);
             const percentValue = subTotal * (percentage / 100);
-            console.log(percentValue);
+            // console.log(percentValue);
             const remainingValue = subTotal - subTotal * (percentage / 100);
-            console.log("Remaining Value:", remainingValue);
+            // console.log("Remaining Value:", remainingValue);
             setTotalAmount(remainingValue);
             setFlatDisplay(false);
         } else {
@@ -186,18 +190,35 @@ const EstimateForm = ({
         setTotalAmount(subTotal - flatDisountAmount);
     };
 
-    const taxValuesHandler = (value) => {
-        //setTaxList(Number(value));
-        let taxListValues = [value];
-        //console.log(taxListValues);
+    const taxValuesHandler = (values) => {
+        let taxListValues = values;
+        let sumValue = 0;
+        taxListValues.forEach((item) => {
+            sumValue += Number(item);
+        });
+        let addingValueOfTax = totalAmount * (sumValue / 100);
+        let finalTaxGot = addingValueOfTax;
 
-        // let sumOfValue = 0;
+        setTotalTax(finalTaxGot);
+        setToatalAfterAddTax(totalAmount + finalTaxGot);
+    };
+    useEffect(() => {
+        // console.log(totalTax);
+    }, [totalTax]);
 
-        // // Iterate over each item in the array, convert it to a number, and sum all numbers
-        // for (let i = 0; i < taxListValues.length; i++) {
-        //     sumOfValue += parseFloat(taxListValues[i]);
-        // }
-        console.log(taxListValues);
+    const shipChargeshandler = (e) => {
+        let shipChargesValue = Number(e.target.value);
+        setGrandTotal(totalAfterAddTax + shipChargesValue);
+        // console.log(grandTotal);
+    };
+    useEffect(() => {
+        // console.log(grandTotal);
+    }, [grandTotal]);
+
+    const paidAmountHandler = (e) => {
+        let paidAmount = e.target.value;
+        let remaingAmount = grandTotal - paidAmount;
+        setDueAmount(remaingAmount);
     };
 
     return (
@@ -496,10 +517,48 @@ const EstimateForm = ({
                 <Col xs={24} md={flatDisplay == true ? 8 : 12}>
                     <CustomInputItem
                         readOnly
-                        // value={20}
+                        value={totalTax}
                         label={`Total Tax`}
                         // labelName={"totaltax"}
                         //name={"totaltax"}
+                        type={"number"}
+                    />
+                </Col>
+                <Col xs={24} md={12}>
+                    <CustomInputItem
+                        // value={totalTax}
+                        label={`Shipping Charges`}
+                        labelName={"shipping"}
+                        name={"shipping"}
+                        type={"number"}
+                        onChange={shipChargeshandler}
+                    />
+                </Col>
+                <Col xs={24} md={12}>
+                    <CustomInputItem
+                        value={grandTotal}
+                        label={`Grand Total`}
+                        // labelName={"shipping"}
+                        // name={"gtotal"}
+                        type={"number"}
+                    />
+                </Col>
+                <Col xs={24} md={12}>
+                    <CustomInputItem
+                        // value={totalTax}
+                        label={`Amount Paid`}
+                        labelName={"paidamount"}
+                        name={"paidamount"}
+                        type={"number"}
+                        onChange={paidAmountHandler}
+                    />
+                </Col>
+                <Col xs={24} md={12}>
+                    <CustomInputItem
+                        value={dueAmount}
+                        label={`Amount Due`}
+                        // labelName={"shipping"}
+                        // name={"gtotal"}
                         type={"number"}
                     />
                 </Col>

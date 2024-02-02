@@ -64,6 +64,7 @@ export const CustomSelectItem = ({
     width,
     mode,
     maxCount,
+    onBlur,
 }) => {
     return (
         <Form.Item
@@ -88,6 +89,7 @@ export const CustomSelectItem = ({
                 placeholder={`Select ${label}`}
                 style={{ width: `${width}` }}
                 onChange={onChange}
+                onBlur={onBlur}
                 mode={mode}
                 maxCount={maxCount}
             >
