@@ -35,18 +35,22 @@ function CreateEstimate({ discount, taxMode }) {
 
     const { data, setData, post, processing, errors, patch, reset } = useForm({
         estimateId: estId,
+        clientname: "",
+        billfirm: "",
+        referenceid: "",
+        eststartdate: "",
+        estvalidity: "",
+        details: "",
         products: [],
+        flatdiscount: "",
         subTotal: "",
-        // title: record.title,
-        // leadowner: record.leadowner,
-        // leadmanager: record.leadmanager,
-        // leadsource: record.leadsource,
-        // industry: record.industry,
-        // status: record.status,
-        // rating: record.rating,
-        // contactdate: record.contactdate,
-        // annualrevenue: record.annualrevenue,
-        // details: record.details,
+        total: "",
+        taxmode: [],
+        totaltax: "",
+        shipcharges: "",
+        grandtotal: "",
+        paidamount: "",
+        dueamount: "",
     });
 
     //uniq id completed

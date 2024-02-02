@@ -40,43 +40,6 @@ import {
 //btns
 import BtnsItems from "../components/Btns/BtnsItems";
 
-// const titleHandler = (e) => {
-//     setData("title", e.target.value);
-//     //console.log(e.target.value);
-// };
-// const leadOwnerHandler = (value) => {
-//     setData("leadowner", value);
-// };
-// const leadManagerHandler = (value) => {
-//     setData("leadmanager", value);
-// };
-// const leadSourceHandler = (value) => {
-//     setData("leadsource", value);
-// };
-// const leadIndustryHandler = (value) => {
-//     setData("industry", value);
-// };
-// const leadStatusHandler = (value) => {
-//     setData("status", value);
-// };
-// const leadRatingHandler = (value) => {
-//     setData("rating", value);
-// };
-// const contactDateHandler = (e) => {
-//     setData("contactdate", e.target.value);
-// };
-// const annualRevenueHandler = (e) => {
-//     setData("annualrevenue", e.target.value);
-// };
-const detailHandler = (html) => {
-    //setData("details", html);
-    setDetails(html);
-};
-// const onCancelData = () => {
-//     window.alert("Are You Sure Want to Cancel?");
-//     router.get(route("leads.index"));
-// };
-
 //custom styles
 
 let estimateTitleStyles = {
@@ -187,20 +150,25 @@ const EstimateForm = ({
 
     const flatDiscountHandler = (e) => {
         let flatDisountAmount = Number(e.target.value);
+        setData("flatdiscount", flatDisountAmount);
         setTotalAmount(subTotal - flatDisountAmount);
+        setData("subtotal", subTotal);
     };
 
     const taxValuesHandler = (values) => {
         let taxListValues = values;
+        setData("taxmode", values);
         let sumValue = 0;
         taxListValues.forEach((item) => {
             sumValue += Number(item);
         });
         let addingValueOfTax = totalAmount * (sumValue / 100);
         let finalTaxGot = addingValueOfTax;
+        setData("totaltax", addingValueOfTax);
 
         setTotalTax(finalTaxGot);
         setToatalAfterAddTax(totalAmount + finalTaxGot);
+        setData("total", totalAfterAddTax);
     };
     useEffect(() => {
         // console.log(totalTax);
@@ -208,17 +176,42 @@ const EstimateForm = ({
 
     const shipChargeshandler = (e) => {
         let shipChargesValue = Number(e.target.value);
+        setShippingCharges(Number(e.target.value));
+        setData("shipcharges", shipChargesValue);
         setGrandTotal(totalAfterAddTax + shipChargesValue);
+        setData("grandtotal", grandTotal);
         // console.log(grandTotal);
     };
     useEffect(() => {
         // console.log(grandTotal);
-    }, [grandTotal]);
+    }, [grandTotal, shippingCharges]);
 
     const paidAmountHandler = (e) => {
         let paidAmount = e.target.value;
+        setData("paidamount", paidAmount);
         let remaingAmount = grandTotal - paidAmount;
         setDueAmount(remaingAmount);
+        setData("dueamount", grandTotal - paidAmount);
+    };
+    const selectClientHandler = (value) => {
+        setData("clientname", value);
+        //console.log(e.target.value);
+    };
+    const billFirmHandler = (value) => {
+        setData("billfirm", value);
+    };
+    const referenceIdHandler = (value) => {
+        setData("referenceid", value);
+    };
+    const estimateStartHandler = (e) => {
+        setData("eststartdate", e.target.value);
+    };
+    const estimateValidityHandler = (e) => {
+        setData("estvalidity", e.target.value);
+    };
+    const detailHandler = (html) => {
+        setData("details", html);
+        setDetails(html);
     };
 
     return (
@@ -244,6 +237,7 @@ const EstimateForm = ({
                         label={"Estimate Client"}
                         name={"client"}
                         data={[{ name: "Client", value: "client" }]}
+                        onChange={selectClientHandler}
                     />
                 </Col>
                 <Col xs={24} md={8}>
@@ -252,6 +246,7 @@ const EstimateForm = ({
                         label={"Billing Firm"}
                         name={"billfirm"}
                         data={[{ name: "billingfirm", value: "billingfirm" }]}
+                        onChange={billFirmHandler}
                     />
                 </Col>
                 <Col xs={24} md={8}>
@@ -259,6 +254,7 @@ const EstimateForm = ({
                         label={"Reference Id"}
                         labelName={"referenceid"}
                         name={"referenceid"}
+                        onChange={referenceIdHandler}
                     />
                 </Col>
                 <Col xs={24} md={8}>
@@ -267,6 +263,7 @@ const EstimateForm = ({
                         labelName={"estimatedate"}
                         name={"estimatedate"}
                         type={"date"}
+                        onChange={estimateStartHandler}
                     />
                 </Col>
                 <Col xs={24} md={8}>
@@ -275,6 +272,7 @@ const EstimateForm = ({
                         labelName={"estimatevalidity"}
                         name={"estimatevalidity"}
                         type={"date"}
+                        onChange={estimateValidityHandler}
                     />
                 </Col>
                 <Col xs={24}>
