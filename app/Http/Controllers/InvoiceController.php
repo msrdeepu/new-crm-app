@@ -3,18 +3,18 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
-use App\Models\Estimate;
-use Illuminate\Http\Request;
+use App\Models\Invoice;
 use App\Models\Setting;
+use Illuminate\Http\Request;
 
-class EstimateController extends Controller
+class InvoiceController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Inertia::render('Estimates/EstimateList');
+        return Inertia::render('Invoices/InvoiceList');
     }
 
     /**
@@ -22,9 +22,10 @@ class EstimateController extends Controller
      */
     public function create()
     {
+
         $discount = Setting::where('type', '=', 'discount',)->where('status', '=', 'active')->get(['name AS label', 'value', 'id AS key']);
         $taxMode = Setting::where('type', '=', 'taxmode',)->where('status', '=', 'active')->get(['name AS label', 'value', 'id AS key']);
-        return Inertia::render('Estimates/CreateEstimate', [
+        return Inertia::render('Invoices/CreateInvoice', [
             'discount' => $discount,
             'taxMode' => $taxMode
         ]);
@@ -65,7 +66,7 @@ class EstimateController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Estimate $estimate)
+    public function show(Invoice $invoice)
     {
         //
     }
@@ -73,15 +74,15 @@ class EstimateController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Estimate $estimate)
+    public function edit(Invoice $invoice)
     {
-        return Inertia::render('Estimates/CreateEstimate');
+        return Inertia::render('Invoices/CreateInvoice');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Estimate $estimate)
+    public function update(Request $request, Invoice $invoice)
     {
         //
     }
@@ -89,7 +90,7 @@ class EstimateController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Estimate $estimate)
+    public function destroy(Invoice $invoice)
     {
         //
     }

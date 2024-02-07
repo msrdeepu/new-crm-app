@@ -8,6 +8,7 @@ use App\Http\Controllers\BusinessleadController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EstimateController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -94,6 +95,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/scrm-estimates/{id}', [EstimateController::class, 'update'])->name('estimates.update');
     Route::delete('/scrm-estimates/{id}', [EstimateController::class, 'destroy'])->name('estimates.destroy');
     //estimates management
+
+    //invoice management
+    Route::get('/scrm-invoice', [InvoiceController::class, 'index'])->name('invoice.index');
+    Route::get('/scrm-invoice/create', [InvoiceController::class, 'create'])->name('invoice.create');
+    Route::post('/scrm-invoice/store', [InvoiceController::class, 'store'])->name('invoice.store');
+    Route::get('/scrm-invoice/{id}/edit', [InvoiceController::class, 'edit'])->name('invoice.edit');
+    Route::patch('/scrm-invoice/{id}', [InvoiceController::class, 'update'])->name('invoice.update');
+    Route::delete('/scrm-invoice/{id}', [InvoiceController::class, 'destroy'])->name('invoice.destroy');
+    //invoice management
 
     Route::get('/scrm-employees', [EmployeeController::class, 'index'])->name('employees.index');
     Route::get('/scrm-employees/create', [EmployeeController::class, 'create'])->name('employees.create');

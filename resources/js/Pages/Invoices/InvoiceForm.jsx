@@ -70,7 +70,7 @@ let listItem = {
     justifyContent: "space-evenly",
 };
 
-const EstimateForm = ({
+const InvoiceForm = ({
     data,
     setData,
     submitHandler,
@@ -223,7 +223,7 @@ const EstimateForm = ({
                         style={estimateTitleStyles}
                         className="est-top-title"
                     >
-                        New Estimate
+                        New Invoice
                     </Title>
                 </Col>
             </Row>
@@ -565,4 +565,4 @@ const EstimateForm = ({
         </Form>
     );
 };
-export default EstimateForm;
+export default InvoiceForm;

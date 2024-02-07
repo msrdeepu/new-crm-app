@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 
 // Function to generate a unique ID
 function generateUniqueID() {
-    const prefix = "EST";
+    const prefix = "INV";
     const currentDate = new Date();
     const month = ("0" + (currentDate.getMonth() + 1)).slice(-2);
     const day = ("0" + currentDate.getDate()).slice(-2);
@@ -28,10 +28,9 @@ import {
     logoHeight,
     logoMarginHeight,
 } from "../components/LogoItem/LogoItem";
-import EstimateForm from "./EstimateForm";
-import Test from "./Test";
+import InvoiceForm from "./InvoiceForm";
 
-function CreateEstimate({ discount, taxMode }) {
+function CreateInvoice({ discount, taxMode }) {
     const [estId, setEstId] = useState(generateUniqueID());
     const [flatDiscount, setFlatDiscount] = useState();
     const [totalTax, setTotalTax] = useState();
@@ -62,12 +61,12 @@ function CreateEstimate({ discount, taxMode }) {
     //uniq id completed
     const submitHandler = () => {
         console.log(data);
-        post("/scrm-estimates/store", data);
+        post("/scrm-invoice/store", data);
     };
     //update form submission
     const updateHandler = (e) => {
         console.log(data);
-        patch(`/scrm-estimates/${record.id}`, data);
+        patch(`/scrm-invoice/${record.id}`, data);
     };
 
     return (
@@ -95,7 +94,7 @@ function CreateEstimate({ discount, taxMode }) {
                 }
             >
                 {/* {console.log(record)} */}
-                <Test
+                <InvoiceForm
                     discount={discount}
                     taxMode={taxMode}
                     dueAmount={dueAmount}
@@ -116,6 +115,6 @@ function CreateEstimate({ discount, taxMode }) {
     );
 }
 
-CreateEstimate.layout = (page) => <AuthenticatedLayout children={page} />;
+CreateInvoice.layout = (page) => <AuthenticatedLayout children={page} />;
 
-export default CreateEstimate;
+export default CreateInvoice;

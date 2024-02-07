@@ -28,6 +28,7 @@ import { GrTechnology } from "react-icons/gr";
 import { MdAddTask } from "react-icons/md";
 import { FaUserCog } from "react-icons/fa";
 import { FaFileInvoice } from "react-icons/fa6";
+import { IoDocumentAttach } from "react-icons/io5";
 
 const { Header, Sider, Content } = Layout;
 
@@ -136,6 +137,15 @@ export default function Authenticated({ header, children }) {
                             label: (
                                 <Link href={window.route("estimates.index")}>
                                     Estimates
+                                </Link>
+                            ),
+                        },
+                        {
+                            key: "invoices",
+                            icon: <IoDocumentAttach />,
+                            label: (
+                                <Link href={window.route("invoice.index")}>
+                                    Invoices
                                 </Link>
                             ),
                         },
