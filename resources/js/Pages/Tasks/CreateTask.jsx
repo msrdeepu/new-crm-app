@@ -1,3 +1,4 @@
+import { useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm } from "@inertiajs/react";
 import { Card } from "antd";
@@ -11,9 +12,25 @@ import {
     logoMarginHeight,
 } from "../components/LogoItem/LogoItem";
 import TaskForm from "./TaskForm";
+// Function to generate a unique ID
+function generateUniqueID() {
+    const prefix = "TSK";
+    const currentDate = new Date();
+    const month = ("0" + (currentDate.getMonth() + 1)).slice(-2);
+    const day = ("0" + currentDate.getDate()).slice(-2);
+    const hours = ("0" + currentDate.getHours()).slice(-2);
+    const minutes = ("0" + currentDate.getMinutes()).slice(-2);
+    const seconds = ("0" + currentDate.getSeconds()).slice(-2);
+    const randomDigits = ("0" + Math.floor(Math.random() * 100)).slice(-2);
+    const uniqueID =
+        prefix + month + day + hours + minutes + seconds + randomDigits;
 
+    return uniqueID;
+}
+//unique id completed
 function CreateTask({ taskList, record }) {
-    let taskId = uuidv4();
+    const [taskId, setTaskId] = useState(generateUniqueID());
+
     const { data, setData, post, processing, errors, patch } = useForm({
         taskId: taskId,
         type: record.type,

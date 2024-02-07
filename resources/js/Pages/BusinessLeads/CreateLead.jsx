@@ -1,7 +1,7 @@
+import { useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm } from "@inertiajs/react";
 import { Card } from "antd";
-import { v4 as uuidv4 } from "uuid";
 
 import {
     logoSrc,
@@ -11,9 +11,24 @@ import {
     logoMarginHeight,
 } from "../components/LogoItem/LogoItem";
 import LeadForm from "./LeadForm";
+// Function to generate a unique ID
+function generateUniqueID() {
+    const prefix = "LEAD";
+    const currentDate = new Date();
+    const month = ("0" + (currentDate.getMonth() + 1)).slice(-2);
+    const day = ("0" + currentDate.getDate()).slice(-2);
+    const hours = ("0" + currentDate.getHours()).slice(-2);
+    const minutes = ("0" + currentDate.getMinutes()).slice(-2);
+    const seconds = ("0" + currentDate.getSeconds()).slice(-2);
+    const randomDigits = ("0" + Math.floor(Math.random() * 100)).slice(-2);
+    const uniqueID =
+        prefix + month + day + hours + minutes + seconds + randomDigits;
 
+    return uniqueID;
+}
+//unique id completed
 function CreateLead({ leadList, record }) {
-    let leadId = uuidv4();
+    const [leadId, setLeadId] = useState(generateUniqueID());
     const { data, setData, post, processing, errors, patch } = useForm({
         leadId: leadId,
         title: record.title,

@@ -151,8 +151,8 @@ function LeadList({ props, leadList }) {
     const columns = [
         {
             title: "ID",
-            dataIndex: "id",
-            ...getColumnSearchProps("id"),
+            dataIndex: "leadId",
+            ...getColumnSearchProps("leadId"),
         },
         {
             title: "Title",

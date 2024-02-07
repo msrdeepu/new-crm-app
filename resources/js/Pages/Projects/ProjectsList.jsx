@@ -149,8 +149,8 @@ function ProjectsList({ props, projectList }) {
     const columns = [
         {
             title: "ID",
-            dataIndex: "id",
-            ...getColumnSearchProps("id"),
+            dataIndex: "projectid",
+            ...getColumnSearchProps("projectid"),
         },
         {
             title: "Title",

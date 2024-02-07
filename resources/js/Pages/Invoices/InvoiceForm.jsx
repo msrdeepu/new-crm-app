@@ -76,7 +76,7 @@ const InvoiceForm = ({
     submitHandler,
     record,
     saveBtn,
-    estId,
+    invId,
     discount,
     taxMode,
     dueAmount,
@@ -229,7 +229,7 @@ const InvoiceForm = ({
             </Row>
             <Row gutter={[8, 4]} style={topEstimateStyles}>
                 <Col xs={24} md={8}>
-                    <CustomInputItem label={"Estimate Id"} value={estId} />
+                    <CustomInputItem label={"Estimate Id"} value={invId} />
                 </Col>
                 <Col xs={24} md={8}>
                     <CustomSelectItem

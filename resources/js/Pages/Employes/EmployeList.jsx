@@ -152,7 +152,7 @@ function EmployeList({ props, mainData }) {
     const columns = [
         {
             title: "Employee Id",
-            dataIndex: "contact_id",
+            dataIndex: "contactid",
             key: "id",
             ...getColumnSearchProps("contactid"),
         },

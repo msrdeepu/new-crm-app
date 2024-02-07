@@ -151,8 +151,8 @@ function TaskList({ props, taskList }) {
     const columns = [
         {
             title: "ID",
-            dataIndex: "id",
-            ...getColumnSearchProps("id"),
+            dataIndex: "taskId",
+            ...getColumnSearchProps("taskId"),
         },
         {
             title: "Task",

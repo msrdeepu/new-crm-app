@@ -31,7 +31,7 @@ import {
 import InvoiceForm from "./InvoiceForm";
 
 function CreateInvoice({ discount, taxMode }) {
-    const [estId, setEstId] = useState(generateUniqueID());
+    const [invId, setInvId] = useState(generateUniqueID());
     const [flatDiscount, setFlatDiscount] = useState();
     const [totalTax, setTotalTax] = useState();
     const [dueAmount, setDueAmount] = useState();
@@ -42,7 +42,7 @@ function CreateInvoice({ discount, taxMode }) {
         setDueAmount(dueAmount);
     }, [dueAmount]);
     const { data, setData, post, processing, errors, patch, reset } = useForm({
-        estimateId: estId,
+        ivoiceId: invId,
         clientname: "",
         billfirm: "",
         referenceid: "",
@@ -106,7 +106,7 @@ function CreateInvoice({ discount, taxMode }) {
                     // saveBtn={record.id == undefined ? "Add" : "Update"}
                     data={data}
                     setData={setData}
-                    estId={estId}
+                    invId={invId}
                     setFlatDiscount={setFlatDiscount}
                     submitHandler={submitHandler}
                 />

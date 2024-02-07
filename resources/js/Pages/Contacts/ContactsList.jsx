@@ -147,19 +147,21 @@ function ContactsList({ props, contactList }) {
     const columns = [
         {
             title: "ID",
-            dataIndex: "id",
-            ...getColumnSearchProps("id"),
+            dataIndex: "contactid",
+            ...getColumnSearchProps("contactid"),
+            id: "contactid",
         },
         {
             title: "CODE",
             dataIndex: "companycode",
             ...getColumnSearchProps("companycode"),
+            id: "contactid",
         },
         {
             title: "Avatar",
             dataIndex: "avatar",
             render: (_, record, index) => (
-                <Space>
+                <Space key={index}>
                     <Image.PreviewGroup
                         preview={{
                             onChange: (current, prev) =>
@@ -188,12 +190,14 @@ function ContactsList({ props, contactList }) {
             title: "Name",
             dataIndex: "fullname",
             ...getColumnSearchProps("fullname"),
+            id: "contactid",
         },
 
         {
             title: "Phone",
             dataIndex: "phone",
             ...getColumnSearchProps("phone"),
+            id: "contactid",
         },
         // {
         //     title: "Email",
@@ -205,6 +209,7 @@ function ContactsList({ props, contactList }) {
             title: "Company",
             dataIndex: "company",
             ...getColumnSearchProps("company"),
+            id: "contactid",
         },
         // {
         //     title: "Role",
@@ -215,19 +220,21 @@ function ContactsList({ props, contactList }) {
             title: "Type",
             dataIndex: "contype",
             ...getColumnSearchProps("contype"),
+            id: "contactid",
         },
 
         {
             title: "Status",
             dataIndex: "status",
             ...getColumnSearchProps("status"),
+            id: "contactid",
         },
 
         {
             title: "Actions",
             dataIndex: "actions",
             render: (_, record, index) => (
-                <Space>
+                <Space key={index}>
                     <Button shape="circle" id={record.id} onClick={editRecord}>
                         {<EditOutlined />}
                     </Button>
