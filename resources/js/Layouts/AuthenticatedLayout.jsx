@@ -78,7 +78,7 @@ export default function Authenticated({ header, children }) {
             >
                 <div className="logo">
                     <Typography.Title className="logo-text" level={3}>
-                        {collapsed ? "MSR" : "Web App"}
+                        {collapsed ? "CRM" : "SCRM"}
                     </Typography.Title>
                 </div>
                 <Menu
