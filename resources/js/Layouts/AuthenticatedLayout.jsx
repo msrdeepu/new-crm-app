@@ -8,6 +8,7 @@ import {
     LogoutOutlined,
     DownOutlined,
     UsergroupAddOutlined,
+    SettingOutlined,
 } from "@ant-design/icons";
 import {
     Col,
@@ -90,7 +91,7 @@ export default function Authenticated({ header, children }) {
                             key: "dashboard",
                             icon: <MdSpaceDashboard />,
                             label: (
-                                <Link href={window.route("dashboard")}>
+                                <Link href={window.route("dashboard.index")}>
                                     Dashboard
                                 </Link>
                             ),
@@ -160,7 +161,7 @@ export default function Authenticated({ header, children }) {
                         },
                         {
                             key: "settings",
-                            icon: <IoSettings />,
+                            icon: <SettingOutlined spin="true" />,
                             label: (
                                 <Link href={window.route("settings.index")}>
                                     Settings

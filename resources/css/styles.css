@@ -4,3 +4,14 @@
 .est-top-title {
     color: orange;
 }
+.card-title {
+    text-align: center;
+}
+.table-gap {
+    margin-top: 8px;
+}
+.server-info-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+}
