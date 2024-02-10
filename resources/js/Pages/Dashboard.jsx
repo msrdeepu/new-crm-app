@@ -4,45 +4,54 @@ import { Card, Typography, Progress, Col, Row, Button, Table } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import "../../css/styles.css";
 
-function Dashboard({ props, clientCount, studentCount, empCount }) {
+function Dashboard({
+    props,
+    clientCount,
+    studentCount,
+    empCount,
+    projectCount,
+    latestProjects,
+    latestLeads,
+}) {
     const leadsColumns = [
         {
             title: "Id",
-            dataIndex: "id",
+            dataIndex: "leadId",
             key: "id",
         },
         {
             title: "Name",
-            dataIndex: "name",
-            key: "name",
+            dataIndex: "leadowner",
+            key: "id",
         },
-        {
-            title: "Phone",
-            dataIndex: "phone",
-            key: "phone",
-        },
+
         {
             title: "Manager",
-            dataIndex: "manager",
-            key: "manager",
+            dataIndex: "leadmanager",
+            key: "id",
+        },
+        {
+            title: "Rating",
+            dataIndex: "rating",
+            key: "id",
         },
     ];
     const projectsColumns = [
         {
             title: "Id",
-            dataIndex: "id",
-            key: "id",
+            dataIndex: "projectid",
+            key: "projectid",
         },
         {
             title: "Name",
-            dataIndex: "name",
-            key: "name",
+            dataIndex: "ptitle",
+            key: "id",
         },
 
         {
-            title: "Manager",
-            dataIndex: "manager",
-            key: "manager",
+            title: "Assigned",
+            dataIndex: "assignto",
+            key: "id",
         },
     ];
 
@@ -55,15 +64,17 @@ function Dashboard({ props, clientCount, studentCount, empCount }) {
             actionTextOne: "All Clients",
             actionTextTwo: "New Client",
             actionLinkTwo: "contacts.create",
+            bgClass: "card-one",
         },
         {
             id: 2,
             title: "Total Projects",
-            dispdata: "Data",
+            dispdata: `${projectCount}`,
             actionLinkOne: "projects.index",
             actionTextOne: "All Projects",
             actionTextTwo: "New Project",
             actionLinkTwo: "projects.create",
+            bgClass: "card-two",
         },
         {
             id: 3,
@@ -73,6 +84,7 @@ function Dashboard({ props, clientCount, studentCount, empCount }) {
             actionTextOne: "All Students",
             actionTextTwo: "New Student",
             actionLinkTwo: "contacts.create",
+            bgClass: "card-three",
         },
         {
             id: 4,
@@ -82,25 +94,31 @@ function Dashboard({ props, clientCount, studentCount, empCount }) {
             actionTextOne: "All Employees",
             actionTextTwo: "New Employee",
             actionLinkTwo: "contacts.create",
+            bgClass: "card-four",
         },
     ];
     return (
         <>
             <Head title="Dashboard" />
 
-            <Card title={`Dashboard`}>
+            <Card title={`Dashboard`} className="table-container">
                 <Row gutter={[8, 4]}>
                     {cardsData.map((item, index) => (
                         <Col xs={24} md={6} key={index}>
                             <Card
+                                className={item.bgClass}
                                 hoverable
                                 title={
-                                    <div className="card-title">
+                                    <div className="card-title glow-text-bold-title">
                                         {item.title}
                                     </div>
                                 }
                                 actions={[
                                     <Link
+                                        style={{
+                                            color: "green",
+                                            fontWeight: "bold",
+                                        }}
                                         href={window.route(
                                             `${item.actionLinkOne}`
                                         )}
@@ -109,6 +127,10 @@ function Dashboard({ props, clientCount, studentCount, empCount }) {
                                         {item.actionTextOne}
                                     </Link>,
                                     <Link
+                                        style={{
+                                            color: "orange",
+                                            fontWeight: "bold",
+                                        }}
                                         href={window.route(
                                             `${item.actionLinkTwo}`
                                         )}
@@ -119,7 +141,7 @@ function Dashboard({ props, clientCount, studentCount, empCount }) {
                                 ]}
                             >
                                 <div>
-                                    <h1 className="card-title">
+                                    <h1 className="card-title glow-text-bold-text ">
                                         {item.dispdata}
                                     </h1>
                                 </div>
@@ -128,12 +150,20 @@ function Dashboard({ props, clientCount, studentCount, empCount }) {
                     ))}
                     <Col xs={24} md={14} className="table-gap">
                         <Card title="Latest Leads" hoverable>
-                            <Table columns={leadsColumns} />
+                            <Table
+                                className="leads-table"
+                                columns={leadsColumns}
+                                dataSource={latestLeads}
+                            />
                         </Card>
                     </Col>
                     <Col xs={24} md={10} className="table-gap">
                         <Card title="Latest Projects" hoverable>
-                            <Table columns={projectsColumns} />
+                            <Table
+                                className="projects-table"
+                                columns={projectsColumns}
+                                dataSource={latestProjects}
+                            />
                         </Card>
                     </Col>
                     <Col xs={24} md={24} className="table-gap">

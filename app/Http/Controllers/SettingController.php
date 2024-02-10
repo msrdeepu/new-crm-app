@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Setting;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,8 +26,12 @@ class SettingController extends Controller
      */
     public function create()
     {
+        $settingList = Setting::where('type', '=', 'setting',)->where('status', '=', 'active')->get(['name AS label', 'value', 'id AS key']);
+        // dd($settingList);
         return Inertia::render('Settings/CreateSettings', [
             'record' => new Setting(),
+            'settingList' => $settingList
+
         ]);
     }
 
@@ -56,6 +61,7 @@ class SettingController extends Controller
      */
     public function edit(Setting $setting, $id)
     {
+        $settingList = Setting::where('type', '=', 'setting',)->where('status', '=', 'active')->get(['name AS label', 'value', 'id AS key']);
         $user = Auth::user();
         $settings = Setting::get(['id', 'type', 'name', 'value', 'pcode', 'dorder', 'status']);
         $setting = Setting::find($id);
@@ -63,6 +69,8 @@ class SettingController extends Controller
             'user' => $user,
             'settingsList' => $settings,
             'record' => $setting,
+            'settingList' => $settingList,
+
         ]);
     }
 

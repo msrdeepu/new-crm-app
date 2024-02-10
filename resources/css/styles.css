@@ -15,3 +15,35 @@
     justify-content: space-between;
     padding: 8px;
 }
+.glow-text-bold-title {
+    text-shadow: 0 0 2px white;
+    color: white;
+    font-weight: bold;
+    font-size: 22px;
+}
+.glow-text-bold-text {
+    text-shadow: 0 0 3px white;
+    color: white;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.card-one {
+    background: -webkit-linear-gradient(to right, #f15f79, #b24592);
+    background: linear-gradient(to right, #f15f79, #b24592);
+}
+.card-two {
+    background: #005c97;
+    background: -webkit-linear-gradient(to right, #363795, #005c97);
+    background: linear-gradient(to right, #363795, #005c97);
+}
+.card-three {
+    background: #136a8a;
+    background: -webkit-linear-gradient(to right, #267871, #136a8a);
+    background: linear-gradient(to right, #267871, #136a8a);
+}
+.card-four {
+    background: #6441a5;
+    background: -webkit-linear-gradient(to right, #2a0845, #6441a5);
+    background: linear-gradient(to right, #2a0845, #6441a5);
+}

@@ -4,7 +4,15 @@ import { Card, Typography } from "antd";
 
 import Settingform from "./Settingform";
 
-function Createsettings({ props, saveBtn, group, month, status, record }) {
+function Createsettings({
+    props,
+    saveBtn,
+    group,
+    month,
+    status,
+    record,
+    settingList,
+}) {
     const { data, setData, post, processing, errors, patch } = useForm({
         type: record.type,
         name: record.name,
@@ -32,6 +40,7 @@ function Createsettings({ props, saveBtn, group, month, status, record }) {
                     submitHandler={
                         record.id == undefined ? submitHandler : updateHandler
                     }
+                    settingList={settingList}
                     data={data}
                     setData={setData}
                     saveBtn={record.id == undefined ? "Add" : "Update"}

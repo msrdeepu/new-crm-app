@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use App\Models\Dashboard;
 use App\Models\Contact;
+use App\Models\Businesslead;
+use App\Models\Project;
 use App\Models\Employee;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Setting;
@@ -21,14 +23,24 @@ class DashboardController extends Controller
         $clientData = DB::table('contacts')->where('contype', 'client')->get();
         $studentData = DB::table('contacts')->where('contype', 'student')->get();
         $employeeData = DB::table('contacts')->where('contype', 'employee')->get();
+        $projectData = DB::table('projects')->get();
+        $leadData = DB::table('businessleads')->get();
+        $latestProjects = $projectData->slice(-5)->values();
+        $latestLeads = $leadData->slice(-5)->values();
         $clientCount = count($clientData);
         $studentCount = count($studentData);
         $empCount = count($employeeData);
+        $projectCount = count($projectData);
+
+        //dd($latestLeads);
 
         return Inertia::render('Dashboard', [
             'clientCount' => $clientCount,
             'studentCount' => $studentCount,
             'empCount' => $empCount,
+            'projectCount' => $projectCount,
+            'latestProjects' => $latestProjects,
+            'latestLeads' => $latestLeads,
         ]);
     }
 

@@ -1,8 +1,15 @@
 import React from "react";
 import { Button, Checkbox, Form, Input, Col, Divider, Row, Select } from "antd";
 import { Head, Link, useForm } from "@inertiajs/react";
+import { CustomSelectItem } from "../components/FormFields/FormFields";
 
-const Settingform = ({ submitHandler, data, setData, saveBtn }) => {
+const Settingform = ({
+    submitHandler,
+    data,
+    setData,
+    saveBtn,
+    settingList,
+}) => {
     const [form] = Form.useForm();
     const statusSelectHandler = (value) => {
         setData("status", value);
@@ -23,12 +30,12 @@ const Settingform = ({ submitHandler, data, setData, saveBtn }) => {
         >
             <Row gutter={[8, 4]}>
                 <Col xs={24} md={12}>
-                    <Form.Item label="Type" name="type">
-                        <Input
-                            placeholder="Enter Type"
-                            onChange={(e) => setData("type", e.target.value)}
-                        />
-                    </Form.Item>
+                    <CustomSelectItem
+                        label={"Type"}
+                        labelName={"type"}
+                        data={settingList}
+                        onChange={(value) => setData("type", value)}
+                    />
                 </Col>
                 <Col xs={24} md={12}>
                     <Form.Item label="Name" name="name">
